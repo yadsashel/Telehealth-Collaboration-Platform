@@ -23,7 +23,7 @@ class User(Base):
         return f"<User(id={self.id}, email='{self.email}')>"
 
 # Database URL
-DATABASE_URL = "mysql+pymysql://sql3758848:1rjNwkwL4K@sql3.freesqldatabase.com:3306/sql3758848"
+DATABASE_URL = "mysql+pymysql://my_user:my_password@mysql-database.onrender.com:3306/my_database"
 
 # Engine and sessionmaker
 engine = create_engine(DATABASE_URL, echo=True)
