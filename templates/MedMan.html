@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/Med-Management.css">
+    <title>Medicines Management</title>
+</head>
+<body>
+    <!---- Creating the navbar and the icon ----->    
+    <header>
+        <a href="{{ url_for ('index') }}">
+        <img src="../static/assets/Icons/mainIcon.png" alt="Telehealth Logo">
+        </a>      
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('PatientRecords') }}">Patient Record</a></li>
+                <li><a href="{{ url_for('MedMan') }}">Medicines Management</a></li>
+            </ul>
+        </nav>
+    </header>  
+
+    <!-- Med-Management -->
+    <div class="container">
+        <h2>Manage Prescribed Medicines</h2>
+        
+        <table id="medicinesTable">
+            <thead>
+                <tr>
+                    <th>Patient ID</th>
+                    <th>Full Name</th>
+                    <th>Instructions</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dynamic rows will be added here via JS -->
+            </tbody>
+        </table>
+
+        <form id="updateMedicineForm" style="display: none;">
+            <label for="patient_id">Patient ID:</label>
+            <input type="text" id="patient_id" required><br>
+
+            <label for="full_name">Full Name:</label>
+            <input type="text" id="full_name" required><br>
+
+            <label for="instructions">Updated Instructions:</label>
+            <textarea id="instructions" required></textarea><br>
+
+            <button type="submit" class="btn-submit">Update Medicine</button>
+        </form>
+    </div>
+
+    <script src="../scripts/Med-Management.js"></script>
+</body>
+</html>

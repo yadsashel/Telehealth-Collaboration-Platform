@@ -1,0 +1,192 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Ubuntu;
+}  
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #d1e8ff, #2a626b 70%, #38a2bc);
+}
+
+
+
+header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+    background-color: rgb(177, 236, 182);
+    justify-content: space-between;
+    border-bottom: 1px solid;
+}
+
+header nav {
+    margin-right: 20px; 
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+header nav ul li {
+    display: inline;        
+    box-shadow: 10px 5px 10px 5px rgb(13, 134, 17);
+    border-radius: 20px;
+    padding: 10px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #1a1a1a;
+    font-weight: bold;
+    margin-right: 40px;
+    margin-left: 20px;
+}
+
+header nav ul li:hover {    
+    box-shadow: 10px 5px 10px 5px rgb(70, 157, 197);
+    transition: all 0.7s ease ease-in-out linear;
+    transform: translateY(-5px);
+    cursor: pointer;
+}
+
+header img {
+    width: 100px;
+    height: 80px;
+    margin-left: 20px;
+}
+
+
+.login-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 40px auto;
+    width: 50%;
+    max-width: 400px;
+    border: 2px solid;
+    border-radius: 20px;
+    padding: 60px;
+}
+
+/* Styling the form and its elements */
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    position: relative; /* Allows absolute positioning for icons */
+}
+
+.form-group label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px 10px 10px 35px; /* Space for the icon */
+    border: 2px solid;
+    border-radius: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* Dropdown style */
+.user-selection-group {
+    position: relative;
+}
+
+.user-selection-group::before {
+    content: '\f0c0'; /* Font Awesome user icon */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.user-selection-group select {
+    appearance: none;
+    padding-right: 30px; /* Space for custom arrow */
+    padding-left: 35px;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+/* Custom arrow for dropdown */
+.user-selection-group::after {
+    content: '\f078'; /* Font Awesome down arrow */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    
+}
+
+/* Button styling */
+button {
+    padding: 10px;
+    border: 2px solid;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #4CAF50;
+}
+
+button:hover {
+    background-color: #71e2b4;
+}
+
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+    background-color: rgb(101, 202, 68);
+}
+
+.footer-column {
+    flex: 1;
+    margin-left: 50px;
+}
+
+.footer-column h3 {
+    font-size: 1.2rem;
+    color: #30323a;
+    margin-bottom: 15px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.footer-column ul li a:hover {
+    color: rgb(70, 157, 197);
+}

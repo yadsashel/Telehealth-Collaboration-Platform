@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for ('static', filename='styles.css/register.css') }}">
+</head>
+<body>
+       
+
+    <!---- Creating the navbar and the icon ----->
+    <header>
+        <a href="{{ url_for ('index') }}">
+        <img src="../static/assets/Icons/mainIcon.png" alt="Telehealth Logo">
+        </a>      
+        <nav>
+            <ul>
+                <li><a href="{{ url_for ('index') }}">Home</a></li>
+                <li><a href="{{ url_for ('Services') }}">Services</a></li>
+                <li><a href="{{ url_for ('About') }}">About Us</a></li>
+                <li><a href="{{ url_for ('Contact') }}">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+ <!-- Flash Messages -->
+ {% with messages = get_flashed_messages(with_categories=true) %}
+ {% if messages %}
+   <div class="flash-messages">
+     {% for category, message in messages %}
+       <div class="alert {{ category }}">
+         <button class="close" onclick="this.parentElement.style.display='none';">&times;</button>
+         {{ message }}
+       </div>
+     {% endfor %}
+   </div>
+ {% endif %}
+{% endwith %}
+
+
+<!-- Register Form Section -->
+<div class="register-container">
+
+    <form class="Register-form" action="/register" method="POST">
+        <!-- User Selection Dropdown -->
+        <div class="form-group user-selection-group">
+            <select id="user-selection" name="user_type" required>
+                <option value="" disabled selected>Select User</option>
+                <option value="patient">Patient</option>
+                <option value="doctor">Doctor</option>
+                <option value="nurse">Nurse</option>
+            </select>
+        </div>
+
+        <!-- Input Fields -->
+        <div class="form-group">
+            <label for="first-name"><i class="fas fa-user"></i></label>
+            <input type="text" id="first-name" name="first_name" placeholder="First Name" required>
+        </div>
+        <div class="form-group">
+            <label for="last-name"><i class="fas fa-user"></i></label>
+            <input type="text" id="last-name" name="last_name" placeholder="Last Name" required>
+        </div>
+        <div class="form-group">
+            <label for="email"><i class="fas fa-envelope"></i></label>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+            <label for="password"><i class="fas fa-lock"></i></label>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+        </div>
+        <div class="form-group">
+            <label for="confirm-password"><i class="fas fa-lock"></i></label>
+            <input type="password" id="confirm-password" name="confirm_password" placeholder="Re-type Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" title="Password must be at least 8 characters long and include at least one number, one uppercase letter, one lowercase letter, and one special character.">
+        </div>
+        <!-- MFA Input Field -->
+        <div class="form-group">
+            <label for="mfa-code"><i class="fas fa-key"></i></label>
+            <input type="text" id="mfa-code" name="mfa_code" placeholder="Enter MFA Code" required>
+        </div>
+
+        <!-- Sign Up Button -->
+        <button type="submit">Register</button>
+
+        <!-- Login Link -->
+        <p>If you already signed up <a href="{{ url_for ('login') }}">Login</a></p>
+    </form>
+</div>
+
+
+<div class="nice-dc">
+    <img src="../static/assets/Images/pexels-klaus-nielsen-6303555.jpg" alt="">
+    <p class="p-card">We Are Here To Help</p>
+</div>
+
+<hr>
+
+
+    <!-- Footer Section -->
+<footer>
+    <!-- Social Media Links -->
+    <div class="footer-column">
+        <h3>Follow Us</h3>
+        <ul>
+            <li><a href="#"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+            <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+        </ul>
+    </div>
+
+    <!-- Navigation Links -->
+    <div class="footer-column">
+        <h3>Navigation</h3>
+        <ul>
+            <li><a href="{{ url_for ('index') }}">Home</a></li>
+            <li><a href="{{ url_for ('Services') }}">Services</a></li>
+            <li><a href="{{ url_for ('About') }}">About Us</a></li>
+            <li><a href="{{ url_for ('Contact') }}">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <!-- Legal Links -->
+    <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+            <li><a href="{{ url_for ('FQA') }}">FAQ</a></li>
+            <li><a href="{{ url_for ('Privacy') }}">Privacy Policy</a></li>
+        </ul>
+    </div>
+</footer>
+
+
+</body>
+</html
