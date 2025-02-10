@@ -11,7 +11,6 @@ body {
 }
 
 
-
 header {
     display: flex;
     justify-content: flex-end;
@@ -189,4 +188,47 @@ footer {
 
 .footer-column ul li a:hover {
     color: rgb(70, 157, 197);
+}
+
+.flash-messages {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 300px;
+}
+
+.alert {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateX(50px);
+    animation: fadeInRight 0.5s ease-out forwards;
+}
+
+.alert.success { background: #4CAF50; } /* Green */
+.alert.error { background: #F44336; } /* Red */
+.alert.warning { background: #FFC107; color: #333; } /* Yellow */
+.alert.info { background: #2196F3; } /* Blue */
+
+.close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.close:hover {
+    transform: scale(1.2);
 }

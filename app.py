@@ -1,17 +1,17 @@
 import os
 import sys
-from flask import Flask, render_template, redirect, request, flash, url_for
+from flask import Flask, render_template, redirect, request, flash, url_for, session 
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import func
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
-from models import User, session, engine
+from models import User, db_session , engine
 
 app = Flask(__name__)
 
 #app config
-app.secret_key = '/Yad_locaL$YeS)%'
-Session = sessionmaker(bind=engine)
+SQLASession = sessionmaker(bind=engine)
+db_session = SQLASession()
 
 
 #route for the home page
@@ -41,7 +41,7 @@ def register():
             hashed_password = generate_password_hash(password)
 
             # Database interaction
-            with session() as db_session:
+            with db_session as session_db:
                 existing_user = db_session.query(User).filter_by(email=email).first()
                 if existing_user:
                     flash('Email already exists', 'error')
@@ -52,11 +52,11 @@ def register():
                     last_name=last_name,
                     email=email,
                     password=hashed_password,
-                    user_type=user_type,
+                    user_type=user_type,  
                     mfa_code=mfa_code
                 )
-                db_session.add(new_user)
-                db_session.commit()
+                session_db.add(new_user)
+                session_db.commit()
 
             flash('Registration successful!', 'success')
             return redirect(url_for('login'))
@@ -69,7 +69,7 @@ def register():
 
 #route for the Login Page
 @app.route('/login', methods=['GET', 'POST'])
-def login():
+def login(): 
     if request.method == 'POST':
         # Extract form data and preprocess inputs
         user_type = request.form['user_type'].strip()
@@ -81,8 +81,8 @@ def login():
         print(f"user_type: {user_type}, first_name: {first_name}, mfa_code: {mfa_code}")
 
         # Query the database
-        with session() as db_session:
-            user = db_session.query(User).filter(
+        with db_session as session_db:
+            user = session_db.query(User).filter(
                 User.user_type == user_type,
                 func.lower(User.first_name) == first_name.lower(),
                 User.mfa_code == mfa_code
@@ -101,7 +101,7 @@ def login():
         # Redirect based on user type
         if user.user_type == 'doctor':
             flash("Welcome, doctor!", "success")
-            return redirect(url_for('MyMedicines'))
+            return redirect(url_for('AppointOver'))
         elif user.user_type == 'patient':
             flash("Welcome, patient!", "success")
             return redirect(url_for('Upcomapp'))
@@ -140,19 +140,44 @@ def Privacy():
    return render_template('Privacy.html')
 
 #route for the Upcom Page
-@app.route('/UpcomingApp')
-def Upcomingapp():
+@app.route('/Upcomapp')
+def Upcomapp():
    return render_template('Upcomapp.html')
 
 #route for the Mymedicines Page
-@app.route('/MyMedinces')
-def MyMmedinces():
-   return render_template('MyMmedinces.html')
+@app.route('/MyMedicines')
+def MyMedicines():
+   return render_template('MyMedicines.html')
 
 #route for the Patient Records Page
 @app.route('/PatientRecords')
 def PatientRecords():
    return render_template('PatientRecords.html')
+
+#route for consult page
+@app.route('/Consult')
+def Consult():
+   return render_template('Consult.html')
+
+#route for consultations page
+@app.route('/Consultations')
+def Consultations():
+   return render_template('Consultations.html')
+
+#route for Medicines-patient page
+@app.route('/Medicines-patient')
+def Medicinespatient():
+   return render_template('Medicines-patient.html')
+
+#route for Appoint-Over page
+@app.route('/AppointOver')
+def AppointOver():
+   return render_template('AppointOver.html')
+
+#route for MedMan page
+@app.route('/MedMan')
+def MedMan():
+   return render_template('MedMan.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
