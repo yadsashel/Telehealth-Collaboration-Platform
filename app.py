@@ -1,6 +1,7 @@
 import os
 import sys
 from flask import Flask, render_template, redirect, request, flash, url_for, session 
+from flask import Flask, render_template, redirect, request, flash, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import func
 from sqlalchemy.exc import SQLAlchemyError
@@ -43,6 +44,7 @@ def register():
             # Database interaction
             with db_session as session_db:
                 existing_user = db_session.query(User).filter_by(email=email).first()
+
                 if existing_user:
                     flash('Email already exists', 'error')
                     return redirect(url_for('register'))
@@ -55,8 +57,13 @@ def register():
                     user_type=user_type,  
                     mfa_code=mfa_code
                 )
-                session_db.add(new_user)
-                session_db.commit()
+
+            session_db.add(new_user)
+            session_db.commit()
+            user_type=user_type,
+            mfa_code=mfa_code
+            db_session.add(new_user)
+            db_session.commit()
 
             flash('Registration successful!', 'success')
             return redirect(url_for('login'))
@@ -69,7 +76,8 @@ def register():
 
 #route for the Login Page
 @app.route('/login', methods=['GET', 'POST'])
-def login(): 
+
+def login():
     if request.method == 'POST':
         # Extract form data and preprocess inputs
         user_type = request.form['user_type'].strip()
@@ -83,6 +91,7 @@ def login():
         # Query the database
         with db_session as session_db:
             user = session_db.query(User).filter(
+       
                 User.user_type == user_type,
                 func.lower(User.first_name) == first_name.lower(),
                 User.mfa_code == mfa_code
@@ -102,6 +111,7 @@ def login():
         if user.user_type == 'doctor':
             flash("Welcome, doctor!", "success")
             return redirect(url_for('AppointOver'))
+           
         elif user.user_type == 'patient':
             flash("Welcome, patient!", "success")
             return redirect(url_for('Upcomapp'))
@@ -140,6 +150,7 @@ def Privacy():
    return render_template('Privacy.html')
 
 #route for the Upcom Page
+
 @app.route('/Upcomapp')
 def Upcomapp():
    return render_template('Upcomapp.html')
@@ -148,6 +159,12 @@ def Upcomapp():
 @app.route('/MyMedicines')
 def MyMedicines():
    return render_template('MyMedicines.html')
+
+
+#route for the Mymedicines Page
+@app.route('/MyMedinces')
+def MyMmedinces():
+   return render_template('MyMmedinces.html')
 
 #route for the Patient Records Page
 @app.route('/PatientRecords')
