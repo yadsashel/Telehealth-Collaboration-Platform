@@ -1,10 +1,15 @@
+import os
 from sqlalchemy import Column, String, Integer, DateTime, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
+from dotenv import load_dotenv 
 
 # Initialize the database
+load_dotenv()
+
 Base = declarative_base()
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 # Define the models
 class User(Base):
@@ -22,12 +27,10 @@ class User(Base):
     def __repr__(self):
         return f"<User(id={self.id}, email='{self.email}')>"
 
-# Database URL
-DATABASE_URL = "mysql+pymysql://my_user:my_password@mysql-database.onrender.com:3306/my_database"
 
 # Engine and sessionmaker
 engine = create_engine(DATABASE_URL, echo=True)
-session = sessionmaker(bind=engine)
+SQLASession = sessionmaker(bind=engine)
 
 # Create tables
 Base.metadata.create_all(engine)
