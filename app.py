@@ -136,7 +136,7 @@ def Contact():
    return render_template('Contact.html')
 
 #route for the Services page
-@app.route('/Services')
+@app.route('/Services') 
 def Services():
    return render_template('Services.html')
 
