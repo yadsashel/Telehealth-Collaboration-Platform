@@ -1,7 +1,0 @@
-FROM mysql:latest
-ENV MYSQL_ROOT_PASSWORD=2002_Yad
-ENV MYSQL_DATABASE=telehealth_db
-ENV MYSQL_USER=telehealth_user
-ENV MYSQL_PASSWORD=2002_Yad
-EXPOSE 3306
-CMD ["mysqld"]
