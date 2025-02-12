@@ -11,6 +11,19 @@
 </head>
 <body>
        
+    <!-- Flash Messages -->
+ {% with messages = get_flashed_messages(with_categories=true) %}
+ {% if messages %}
+   <div class="flash-messages">
+     {% for category, message in messages %}
+       <div class="alert {{ category }}">
+         <button class="close" onclick="this.parentElement.style.display='none';">&times;</button>
+         {{ message }}
+       </div>
+     {% endfor %}
+   </div>
+ {% endif %}
+{% endwith %}
 
     <!---- Creating the navbar and the icon ----->
     <header>
@@ -27,19 +40,6 @@
         </nav>
     </header>
 
- <!-- Flash Messages -->
- {% with messages = get_flashed_messages(with_categories=true) %}
- {% if messages %}
-   <div class="flash-messages">
-     {% for category, message in messages %}
-       <div class="alert {{ category }}">
-         <button class="close" onclick="this.parentElement.style.display='none';">&times;</button>
-         {{ message }}
-       </div>
-     {% endfor %}
-   </div>
- {% endif %}
-{% endwith %}
 
 
 <!-- Register Form Section -->

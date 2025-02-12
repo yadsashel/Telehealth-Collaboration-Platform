@@ -62,6 +62,7 @@ def register():
             session_db.commit()
             user_type=user_type,
             mfa_code=mfa_code
+
             db_session.add(new_user)
             db_session.commit()
 

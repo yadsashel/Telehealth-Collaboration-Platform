@@ -4,141 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css/Upcom-app.css') }}">
-    <link rel="icon" href="../static/assets/Icons/mainIcon.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css/PatientRecords.css') }}">
     <title>Upcoming Appointments</title>
 </head>
 <body>
-
-  <!-- Flash Messages -->
-{% with messages = get_flashed_messages(with_categories=true) %}
-{% if messages %}
-  <div class="flash-messages">
-    {% for category, message in messages %}
-      <div class="alert {{ category }}">
-        <span>{{ message }}</span>
-        <button class="close" onclick="this.parentElement.style.display='none';">&times;</button>
-      </div>
-    {% endfor %}
-  </div>
-{% endif %}
-{% endwith %}
-
     
      <!---- Creating the navbar and the icon ----->
-    <header>
+     <header>
         <a href="{{ url_for ('index') }}">
-        <img src="../static/assets/Icons/mainIcon.png" alt="Telehealth Logo">   
-        </a>      
+        <img src="../static/assets/Icons/mainIcon.png" alt="Telehealth Logo">
         <nav>
             <ul>
-                <li><a href="{{ url_for ('Upcomapp') }}">Upcoming Appointments</a></li>
-                <li><a href="{{ url_for ('Consultations') }}">Consultations</a></li>
-                <li><a href="{{ url_for ('MedMan') }}">Medicines Management</a></li>
+                <li><a href="{{ url_for ('Upcom') }}">Upcoming Appointments</a></li>
+                <li><a href="{{ url_for ('Consult') }}">Consultation History</a></li>
+                <li><a href="{{ url_for ('Medicines') }}">My Medicines</a></li>
             </ul>
         </nav>
     </header>
 
-          
-<div class="container_display">
-  <div class="background_img"></div> <!-- Blurred background image -->
-  
-  <div class="content">
-      <div class="text_section">
-          <h2>Get the Right Consultation As You Wish</h2>
-          <p>Book an appointment <br> the best specialists at your convenience.</p>
-      </div>
 
-      <form id="appointmentForm">
-          <h3>Schedule an Appointment</h3>
-
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name" required>
-      
-          <label for="age">Age:</label>
-          <input type="number" id="age" name="age" required>
-
-          <label for="gender">Gender:</label>
-          <select id="gender" name="gender" required>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option> 
-          </select>
-
-          <label for="reason">Reason:</label>
-          <textarea id="reason" name="reason" required></textarea>
-
-          <label for="date">Date:</label>
-          <input type="date" id="date" name="date" required>
-
-          <label for="time">Time:</label>
-          <input type="time" id="time" name="time" required>
-
-          <button type="submit">Schedule Appointment</button>
-      </form>
-  </div>
-</div>
-
-<!-- Cards Section -->
-<div class="cards-container">
-  <!-- Card 1: Fast Scheduling -->
-  <div class="card">
-      <img src="../static/assets/Images/pexels-karolina-grabowska-6627930.jpg" alt="Fast Scheduling">
-      <h3>Fast & Easy Scheduling</h3>
-      <p>Book an appointment in just a few clicks. No long waits, no hassle.</p>
-  </div>
-
-  <!-- Card 2: Expert Doctors -->
-  <div class="card">
-      <img src="../static/assets/Images/pexels-cristian-rojas-8460158.jpg" alt="Expert Doctors">
-      <h3>Meet Expert Doctors</h3>
-      <p>Get consultations from certified professionals who care about your health.</p>
-  </div>
-
-  <!-- Card 3: 24/7 Availability -->
-  <div class="card">
-      <img src="../static/assets/Images/pexels-mikhail-nilov-7681843.jpg" alt="24/7 Support">
-      <h3>24/7 Support</h3>
-      <p>Need help? Our team is here for you anytime, anywhere.</p>
-  </div>
-</div>
-
-
-<!-- Footer Section -->
-<footer>
-  <!-- Social Media Links -->
-  <div class="footer-column">
-      <h3>Follow Us</h3>
-      <ul>
-          <li><a href="#"><i class="fab fa-facebook-f"></i> Facebook</a></li>
-          <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
-          <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
-      </ul>
-  </div>
-
-  <!-- Navigation Links -->
-  <div class="footer-column">
-      <h3>Navigation</h3>
-      <ul>
-          <li><a href="{{ url_for ('index') }}">Home</a></li>
-          <li><a href="{{ url_for ('Services') }}">Services</a></li>
-          <li><a href="{{ url_for ('About') }}">About Us</a></li>
-          <li><a href="{{ url_for ('Contact') }}">Contact Us</a></li>
-      </ul>
-  </div>
-
-  <!-- Legal Links -->
-  <div class="footer-column">
-      <h3>Quick Links</h3>
-      <ul>
-          <li><a href="{{ url_for ('FQA') }}">FAQ</a></li>
-          <li><a href="{{ url_for ('Privacy') }}">Privacy Policy</a></li>
-      </ul>
-  </div>
-</footer>
-
-<script src="{{ url_for ('static', filename='scripts/Upcom-app.js') }}"></script>
-=======
 <!-- UpcomingAppointments.html -->
 <form id="appointmentForm">
     <label for="name">Name:</label>
@@ -168,7 +52,5 @@
 
 
 <div id="message"></div> 
-
->>>>>>> origin/main
 </body>
 </html>

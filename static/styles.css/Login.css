@@ -10,6 +10,8 @@ body {
     background: linear-gradient(to bottom, #d1e8ff, #2a626b 70%, #38a2bc);
 }
 
+
+
 header {
     display: flex;
     justify-content: flex-end;

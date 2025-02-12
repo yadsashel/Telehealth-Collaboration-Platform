@@ -145,6 +145,7 @@ footer {
 
 .footer-column ul {
     list-style: none;
+    padding: 0;
 }
 
 .footer-column ul li {
@@ -321,3 +322,4 @@ footer {
     font-weight: bold;
     color: rgb(96 136 167);
 }
+
