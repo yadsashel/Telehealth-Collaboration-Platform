@@ -7,18 +7,20 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    box-sizing: border-box;
+
 }
 
 header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding: 20px;
     background-color: rgb(177, 236, 182);
-    justify-content: space-between;
+    align-items: center;
 }
 
 header nav {
-    margin-right: 20px; 
+    margin-right: 20px;
 }
 
 header nav ul {
@@ -56,11 +58,14 @@ header img {
     margin-left: 20px;
 }
 
-hr {
-    border: none;
-    border-top: 2px solid #000;
-    
+/* ✨ Responsive Navbar (Mobile) */
+.hamburger-menu {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+    padding: 10px;
 }
+
 
 .hero {
     display: flex;
@@ -323,3 +328,83 @@ footer {
     color: rgb(96 136 167);
 }
 
+
+/* Media Query for Screens Smaller Than 768px */
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: row;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .hamburger-menu {
+        display: block;  /* Show menu icon on mobile */
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 100%;
+        background-color: rgba(177, 236, 182, 0.95);
+        text-align: center;
+        z-index: 100;
+        
+        /* 🔥 Animation: Start Hidden */
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+
+    /* 🟢 When Active (Navbar Opens) */
+    .nav-links.active {
+        transform: translateY(0); /* Slides Down */
+        opacity: 1; /* Fades In */
+        visibility: visible;
+    }
+
+    .nav-links li {
+        margin: 10px auto;
+        padding: 14px 57px;
+    }
+
+    .hero {
+        width: auto;
+        height: auto;
+    } 
+
+    .content {
+        width: auto;
+        height: auto;
+        scale: 0.5;
+    }
+
+    .description p{
+        width: auto;
+        height: auto;
+        scale: 0.6;
+        text-align: left;
+    }
+
+    .wy_shs p {
+        font-size: 12px;
+    }
+
+    .main_section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column
+    }
+
+    .rvw_sct {
+        flex-direction: column;
+    }
+
+    .cards_section {
+        scale: 0.9;
+    }
+}

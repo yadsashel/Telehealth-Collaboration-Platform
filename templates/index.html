@@ -10,19 +10,20 @@
 <body>
       
      <!---- Creating the navbar and the icon ----->
-     <header> 
-        <a href="{{ url_for ('index') }}">
-        <img src="../static/assets/Icons/mainIcon.png" alt="Telehealth Logo">
-        </a>      
+     <header>
+        <img src="../static/assets/Icons/mainIcon.png" alt="Logo"> 
+
         <nav>
-            <ul>
+            <div class="hamburger-menu">&#9776;</div>  <!-- ☰ Hamburger Icon -->
+            <ul class="nav-links">
                 <li><a href="{{ url_for ('index') }}">Home</a></li>
-                <li><a href="{{ url_for ('Services') }}">Services</a></li>
                 <li><a href="{{ url_for ('About') }}">About Us</a></li>
+                <li><a href="{{ url_for ('Services') }}">Services</a></li>
                 <li><a href="{{ url_for ('Contact') }}">Contact Us</a></li>
             </ul>
         </nav>
-    </header>    
+    </header>
+ 
 
        <!-- Content of the Home page -->
        <div class="hero">
@@ -118,8 +119,6 @@
     
     
     
-    <hr>
-
      <!-- Footer Section -->
 <footer>
     <!-- Social Media Links -->
@@ -153,5 +152,6 @@
     </div>
 </footer>
 
+<script src="{{ url_for ('static', filename='scripts/index.js') }}"></script>
 </body>
 </html>

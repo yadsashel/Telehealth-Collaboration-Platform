@@ -2,38 +2,106 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=Ab, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for ('static', filename='styles.css/About.css') }}">
 </head>
 <body>
 
-    <!---- Creating the navbar and the icon ----->
-    <header>
-        <a href="{{ url_for ('index') }}">
-        <img src="../static/assets/Icons/mainIcon.png" alt="Telehealth Logo">
-        </a>      
+     <!---- Creating the navbar and the icon ----->
+     <header>
+        <img src="../static/assets/Icons/mainIcon.png" alt="Logo"> 
+
         <nav>
-            <ul>
+            <div class="hamburger-menu">&#9776;</div>  <!-- ☰ Hamburger Icon -->
+            <ul class="nav-links">
                 <li><a href="{{ url_for ('index') }}">Home</a></li>
-                <li><a href="#">Services</a></li>
                 <li><a href="{{ url_for ('About') }}">About Us</a></li>
+                <li><a href="{{ url_for ('Services') }}">Services</a></li>
                 <li><a href="{{ url_for ('Contact') }}">Contact Us</a></li>
             </ul>
         </nav>
     </header>
        
-     <!---- Creating the about us section ---->
-     <section class="about-us">
-        <h1>About Us</h1>
-        <hr>
-        <p>
-            We are actually a platform<br>that helps patients from different countries
-            across the world,<br> offering valuable services and helping those who are 
-            not able to travel from one country to another.
-        </p>
-    </section>
+     <!-- About Us Section -->
+<section class="about">
+    <h1>About Our Platform</h1>
+    <p>Welcome to the **Telehealth Collaboration Platform**, where healthcare meets technology. Our mission is to make medical consultations more accessible, efficient, and secure for both patients and healthcare professionals.</p>
 
+    <div class="about-content">
+        <div class="about-box">
+            <h2>Our Mission</h2>
+            <p>We strive to revolutionize healthcare by offering a seamless and user-friendly platform for remote consultations, patient records, and real-time collaboration.</p>
+        </div>
+        <div class="about-box">
+            <h2>Why Choose Us?</h2>
+            <ul>
+                <li>✔ **Convenient and secure online consultations**</li>
+                <li>✔ **Easy scheduling and appointment tracking**</li>
+                <li>✔ **Trusted by verified healthcare professionals**</li>
+                <li>✔ **AI-powered analytics for better health management**</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="team">
+    <h2>Meet Our Team</h2>
+    <div class="team-members">
+        <div class="member">
+            <img src="{{ url_for('static', filename='assets/Images/team1.jpg') }}" alt="Team Member">
+            <h3>Dr. Alex Johnson</h3>
+            <p>Chief Medical Officer</p>
+        </div>
+        <div class="member">
+            <img src="{{ url_for('static', filename='assets/Images/team2.jpg') }}" alt="Team Member">
+            <h3>Sophia Williams</h3>
+            <p>Lead Developer</p>
+        </div>
+        <div class="member">
+            <img src="{{ url_for('static', filename='assets/Images/team3.jpg') }}" alt="Team Member">
+            <h3>Michael Brown</h3>
+            <p>Product Manager</p>
+        </div>
+    </div>
+</section>
+
+
+    <script src="{{ url_for ('static', filename='scripts/About.js') }}"></script>
+
+    <!-- Footer Section -->
+<footer>
+    <!-- Social Media Links -->
+    <div class="footer-column">
+        <h3>Follow Us</h3>
+        <ul>
+            <li><a href="#"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+            <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+        </ul>
+    </div>
+
+    <!-- Navigation Links -->
+    <div class="footer-column">
+        <h3>Navigation</h3>
+        <ul>
+            <li><a href="{{ url_for ('index') }}">Home</a></li>
+            <li><a href="{{ url_for ('Services') }}">Services</a></li>
+            <li><a href="{{ url_for ('About') }}">About Us</a></li>
+            <li><a href="{{ url_for ('Contact') }}">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <!-- Legal Links -->
+    <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+            <li><a href="{{ url_for ('FQA') }}">FAQ</a></li>
+            <li><a href="{{ url_for ('Privacy') }}">Privacy Policy</a></li>
+        </ul>
+    </div>
+</footer>
 </body>
 </html>

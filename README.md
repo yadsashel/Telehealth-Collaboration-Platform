@@ -12,12 +12,19 @@ The Telehealth Collaboration Platform is a comprehensive solution designed to fa
 - **Patient Record Management:** Easy management of patient records, accessible to authorized users.
 - **Multi-Factor Authentication (MFA):** Enhanced security for user sign-up and login processes.
 - **Analytics and Reporting:** Provides insights and reports on various healthcare metrics.
+- **AI-Powered Insights:** Uses machine learning to provide predictions and suggestions for better patient care.
+- **Automated Summarization:** AI-generated summaries of patient records and consultation notes.
+- **Natural Language Processing (NLP) for Records:** Enables automatic extraction of key details from medical reports.
+- **Voice Recognition for Notes:** Doctors and nurses can dictate notes, which are transcribed into text.
+- **Real-Time Notifications:** Alerts for upcoming appointments, new messages, and status updates.
+- **Seamless Data Synchronization:** Ensures that updates in one section reflect across all relevant dashboards.
 
 ### Technology Stack
 - **Frontend:** HTML, CSS, JavaScript (React)
 - **Backend:** Python (Flask)
 - **Database:** MySQL
-- **Deployment:** AWS
+- **AI & Machine Learning:** TensorFlow, OpenAI API
+- **Deployment:** aiven
 - **Version Control:** GitHub
 
 ### Installation
@@ -77,16 +84,13 @@ Telehealth-Collaboration-Platform-MVP/
    - Upon successful login, the user is redirected to their specific dashboard.
 
 ### Challenges
-- **Technical:** Describe the most challenging technical aspect (e.g., integrating video consultations securely).
-- **Non-Technical:** Describe non-technical challenges faced (e.g., project management and coordination).
+- **Technical:** Ensuring seamless integration of AI-powered features with existing workflows, and handling real-time data synchronization efficiently.
+- **Non-Technical:** Managing user adoption, ensuring compliance with healthcare regulations, and maintaining a user-friendly experience.
 
 ### Progress
-- **Current Status:** Provide a progress update with a rating out of 10.
-- **Completed:** What parts of the project are fully functional.
-- **Pending:** What aspects are still in progress or need refinement.
-
-### Screenshots
-Include at least 2 screenshots showcasing key features of your application.
+- **Current Status:** 8/10 - Core features are functional, with ongoing refinements.
+- **Completed:** User authentication, appointment scheduling, video consultations, patient record management.
+- **Pending:** Advanced AI integrations, final UI/UX refinements, performance optimizations.
 
 ### Contributing
 If you are interested in contributing to this project, please fork the repository and submit a pull request with your changes.
@@ -98,5 +102,3 @@ This project is licensed under the MIT License.
 For any questions or feedback, please reach out to [yazidepk@gmail.com].
 
 ---
-
-[def]: /assets/Icons/mainIcon.png
