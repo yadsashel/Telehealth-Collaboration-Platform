@@ -75,7 +75,7 @@ Telehealth-Collaboration-Platform-MVP/
 1. **Sign Up Process:**
    - Navigate to the sign-up page.
    - Select user type (Patient, Doctor, or Nurse).
-   - Fill in required details and complete MFA.
+   - Fill in required details and complete MFA code.
    - Upon successful sign-up, the user is redirected to their specific dashboard.
 
 2. **Login Process:**
