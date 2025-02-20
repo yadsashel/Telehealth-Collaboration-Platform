@@ -1,4 +1,4 @@
-![My Logo](/assets/Icons/mainIcon.png)
+![My Logo](./static/assets/Icons/mainIcon.png)
 
 # Telehealth Collaboration Platform
 
