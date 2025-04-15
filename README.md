@@ -52,7 +52,7 @@ The Telehealth Collaboration Platform is a comprehensive solution designed to fa
 
 5. **Run the Application:**
    ```bash
-   flask run
+   python app.py
    ```
    
 ### Project Structure
@@ -65,7 +65,7 @@ Telehealth-Collaboration-Platform-MVP/
 ├── config/                 # Configuration files
 ├── docs/                   # Documentation
 ├── front-end/              # Frontend files (HTML, CSS, JavaScript)
-│   ├── pages/              # Each page (home, login, dashboard, etc.)
+│   ├── templates/          # Each page (home, login, dashboard, etc.)
 │   ├── styles/             # CSS files for styling
 │   └── scripts/            # JavaScript files for interactivity
 └── README.md               # Project documentation (this file)
@@ -75,7 +75,7 @@ Telehealth-Collaboration-Platform-MVP/
 1. **Sign Up Process:**
    - Navigate to the sign-up page.
    - Select user type (Patient, Doctor, or Nurse).
-   - Fill in required details and complete MFA code.
+   - Fill in the secret code.
    - Upon successful sign-up, the user is redirected to their specific dashboard.
 
 2. **Login Process:**
@@ -99,6 +99,6 @@ If you are interested in contributing to this project, please fork the repositor
 This project is licensed under the MIT License.
 
 ### Contact
-For any questions or feedback, please reach out to [webusineservices@gmail.com].
+For any questions or feedback, please reach out to [yadsashel@gmail.com].
 
 ---
