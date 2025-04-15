@@ -6,31 +6,98 @@
     <title>Contact Us</title>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for ('static', filename='styles.css/Contact.css') }}">
+    <link rel="stylesheet" href="{{ url_for ('static', filename='styles.css/FT-RES.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon" href="../static/assets/Icons/mainIcon.png">
 </head>
 <body>
     
-      <!---- Creating the navbar and the icon ----->
-    <header>
-        <a href="{{ url_for ('index') }}">
-        <img src="../static/assets/Icons/mainIcon.png" alt="Telehealth Logo">
-        </a>      
+       <!---- Creating the navbar and the icon ----->
+     <header>
+        <div class="left-header">
+            <img src="../static/assets/Icons/mainIcon.png" alt="Logo" class="logo">
+        </div>
+    
+        <div class="right-header">
+            <div class="hamburger-menu">&#9776;</div> <!-- ☰ -->
+        </div>
+    
         <nav>
-            <ul>
-                <li><a href="{{ url_for ('index') }}">Home</a></li>
-                <li><a href="{{ url_for ('Services') }}">Services</a></li>
-                <li><a href="{{ url_for ('About') }}">About Us</a></li>
-                <li><a href="{{ url_for ('Contact') }}">Contact Us</a></li>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('About') }}">About Us</a></li>
+                <li><a href="{{ url_for('Services') }}">Services</a></li>
+                <li><a href="{{ url_for('Contact') }}">Contact Us</a></li>
             </ul>
         </nav>
+        <a class="a" href="{{  url_for ('register') }}">Sign Up</a>
     </header>
 
 
-       <!---- Creating the contact us section ---->
 
-       <div class="contact-us">
-         <h1>Contact Us</h1>
-         <p>telehealthcollaborationplatform@contact.health<br>+21267349029</p>
-       </div>
+<!-- Creating the contact us section -->
+<section class="contact__us">
+    <div class="contact__info">
+      <h1>Contact Us</h1>
+      <p><i class="fas fa-envelope"></i> telehealthcollaboration@platform.health</p>
+      <p><i class="fas fa-phone"></i> +1 814 351 4175</p>
+      <p><i class="fas fa-map-marker-alt"></i> 242 Greene St, New York, NY 10003, USA</p>
+    </div>
+  
+    <div class="contact__form">
+      <form action="#" method="post">
+        <input type="text" id="name" name="name" required placeholder="Full Name" />
+        <input type="email" id="email" name="email" required placeholder="Your Email" />
+        <textarea name="message" id="message" rows="5" placeholder="Write your message here..." required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </section>
+  
 
+
+
+       
+<!-- Footer Section -->
+<footer>
+    <!-- Social Media Links -->
+    <div class="footer_content">
+    <div class="footer-column">
+        <h3>Follow Us</h3>
+        <ul>
+            <li><a href="#"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+            <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+        </ul>
+    </div>
+
+    <!-- Navigation Links -->
+    <div class="footer-column">
+        <h3>Navigation</h3>
+        <ul>
+            <li><a href="{{ url_for ('index') }}">Home</a></li>
+            <li><a href="{{ url_for ('Services') }}">Services</a></li>
+            <li><a href="{{ url_for ('About') }}">About Us</a></li>
+            <li><a href="{{ url_for ('Contact') }}">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <!-- Legal Links -->
+    <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+            <li><a href="{{ url_for ('FQA') }}">FAQ</a></li>
+            <li><a href="{{ url_for ('Privacy') }}">Privacy Policy</a></li>
+        </ul>
+    </div>
+    </div>
+    
+    <div class="cp">
+    <p>&copy; 2025 Telehealth Collaboration Platform. All rights reserved. | Designed and developed with care.</p>
+    </div>
+</footer>
+
+
+<script src="{{ url_for ('static', filename = 'scripts/contact-us.js') }}" ></script>
 </body>
 </html>

@@ -3,9 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for ('static', filename='styles.css/Services.css') }}">
+    <link rel="icon" href="../static/assets/Icons/mainIcon.png">
+    <title>Services</title> 
 </head>
 <body>
+
+     <!---- Creating the navbar and the icon ----->
+     <header>
+        <div class="left-header">
+            <img src="../static/assets/Icons/mainIcon.png" alt="Logo" class="logo">
+        </div>
     
+        <div class="right-header">
+            <div class="hamburger-menu">&#9776;</div> <!-- ☰ -->
+        </div>
+    
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('About') }}">About Us</a></li>
+                <li><a href="{{ url_for('Services') }}">Services</a></li>
+                <li><a href="{{ url_for('Contact') }}">Contact Us</a></li>
+            </ul>
+        </nav>
+        <a class="a" href="{{  url_for ('register') }}">Sign Up</a>
+    </header>
+
+    <!-- main Section -->
+    <section class="services">
+        <div class="main_dv">
+            <div class="main_titph">
+                <h1>Our Healthcare<br>That Everyone<br>Search For</h1>
+                <p>Leveraging a group of seasoned specialists and advanced <br>innovations, we are committed to enabling individuals.</p>
+                <a href="{{ url_for ('register') }}">Get Started</a>
+
+                <!-- animated numbers -->
+                <div class="animated_nmb">
+                    <div class="percents">
+                        <div class="counter-container">
+                            <span id="counter1">0</span><span class="tuttt">+</span>
+                            <p>Medical experts</p>
+                        </div>
+                        <div class="counter-container">
+                            <span id="counter2">0</span><span class="tuttt">+</span>
+                            <p>Beneficiary patients</p>
+                        </div>
+                        <div class="counter-container">
+                            <span id="counter3">0</span><span class="tuttt">%</span>
+                            <p>Satisfaction rate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- main Image -->
+            <div class="main_imgg">
+                <img src="../static/assets/Images/Natural_Green_Interior_Design_Mood_Board_Photo_Collage-removebg-preview.png" alt="">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section class="services_me">
+        <div class="serv_tites">
+            <h1>We Offer a Wide Range of <br>Unique Services</h1>
+            <p>We provide top-quality telehealth services <br>to ensure you get the best care from the comfort of your home.</p>
+        </div>
+
+                <!-- Cards Container -->
+                <div class="cards_serv-vet">
+                    <div class="cards_serv_1">
+                        <h3>Online Consultation</h3>
+                        <p>Connect with certified doctors anytime, anywhere through secure video calls.</p>
+                        <img src="../static/assets/Images/onlince-consultations.avif" alt="Online Consultation">
+                    </div>
+
+                    <div class="cards_serv">
+                        <h3>E-Prescriptions</h3>
+                        <p>Get prescriptions digitally sent to your pharmacy for quick and easy access to medication.</p>
+                        <img src="../static/assets/Images/E-Prescriptions.avif" alt="E-Prescriptions">
+                    </div>
+
+                    <div class="cards_serv">
+                        <h3>Easy Appointment Booking</h3>
+                        <p>Schedule and manage your medical appointments hassle-free with instant booking.</p>
+                        <img src="../static/assets/Images/Easy Appointment Booking.avif" alt="Easy Appointment Booking">
+                    </div>
+
+                    <div class="cards_serv_3">
+                        <h3>Health Tracking</h3>
+                        <p>Track your health progress and receive AI-powered health reminders.</p>
+                        <img src="../static/assets/Images/Health Tracking.jpg" alt="Health Tracking">
+                    </div>
+                </div>
+    </section>
+
+    <!-- other services -->
+     <section class="othr_serv">
+            <div class="othr__main">
+                <h1>Powered by Innovation</h1>
+                <p>At Telehealth Collaboration Platform, we’re not just offering healthcare <br> <span>we’re reshaping the way it works using the latest technology and AI.</span> <br> Here’s what sets us apart from the rest of the world</p>
+                <img src="../static/assets/Images/3401630.jpg" alt="">
+            </div>
+            <div class="othr_cards">
+                <div class="card_look">
+                    <div class="img">
+                      <img src="../static/assets/Images/focus_18192402.png" alt="">
+                    </div>
+                    <h4>AI-Powered Patient Insights</h4>
+                    <p>Real-time analysis of your health to predict and prevent issues before they happen. Smarter, faster, proactive care.</p>
+                </div>
+
+                <div class="card_look">
+                    <div class="img">
+                      <img src="../static/assets/Images/video-conference_11496273.png" alt="">
+                    </div>
+                    <h4>Collaborative Virtual Rooms</h4>
+                    <p>Doctors, nurses, and patients can now connect in a shared digital space — like a virtual hospital room.
+                        Everyone connected. Nothing missed.</p>
+                </div>
+
+                <div class="card_look">
+                    <div class="img">
+                       <img src="../static/assets/Images/pharmacy_7850983.png" alt="">
+                    </div>
+                    <h4>Intelligent Medication & Reminder System</h4>
+                    <p>AI-based alerts that adjust to your routine, health data, and habits — not just the clock.
+                        Right time. Right way. Every time.</p>
+                </div>
+            </div>
+     </section>
+
+
+
+       
+    <!-- Footer Section -->
+<footer>
+    <!-- Social Media Links -->
+    <div class="footer_content">
+    <div class="footer-column">
+        <h3>Follow Us</h3>
+        <ul>
+            <li><a href="#"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+            <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+        </ul>
+    </div>
+
+    <!-- Navigation Links -->
+    <div class="footer-column">
+        <h3>Navigation</h3>
+        <ul>
+            <li><a href="{{ url_for ('index') }}">Home</a></li>
+            <li><a href="{{ url_for ('Services') }}">Services</a></li>
+            <li><a href="{{ url_for ('About') }}">About Us</a></li>
+            <li><a href="{{ url_for ('Contact') }}">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <!-- Legal Links -->
+    <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+            <li><a href="{{ url_for ('FQA') }}">FAQ</a></li>
+            <li><a href="{{ url_for ('Privacy') }}">Privacy Policy</a></li>
+        </ul>
+    </div>
+    </div>
+    
+    <div class="cp">
+    <p>&copy; 2025 Telehealth Collaboration Platform. All rights reserved. | Designed and developed with care.</p>
+    </div>
+</footer>
+
+<script src="{{ url_for ('static', filename='scripts/Services.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.8/countUp.umd.js"></script>
 </body>
 </html>

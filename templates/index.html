@@ -6,22 +6,31 @@
     <title>Telehealth Collaboration Platform</title>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for ('static', filename='styles.css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for ('static', filename='styles.css/FT-RES.css') }}">
+    <link rel="icon" href="../static/assets/Icons/mainIcon.png">
 </head>
 <body>
       
      <!---- Creating the navbar and the icon ----->
+    
      <header>
-        <img src="../static/assets/Icons/mainIcon.png" alt="Logo"> 
-
+        <div class="left-header">
+            <img src="../static/assets/Icons/mainIcon.png" alt="Logo" class="logo">
+        </div>
+    
+        <div class="right-header">
+            <div class="hamburger-menu">&#9776;</div> <!-- ☰ -->
+        </div>
+    
         <nav>
-            <div class="hamburger-menu">&#9776;</div>  <!-- ☰ Hamburger Icon -->
             <ul class="nav-links">
-                <li><a href="{{ url_for ('index') }}">Home</a></li>
-                <li><a href="{{ url_for ('About') }}">About Us</a></li>
-                <li><a href="{{ url_for ('Services') }}">Services</a></li>
-                <li><a href="{{ url_for ('Contact') }}">Contact Us</a></li>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('About') }}">About Us</a></li>
+                <li><a href="{{ url_for('Services') }}">Services</a></li>
+                <li><a href="{{ url_for('Contact') }}">Contact Us</a></li>
             </ul>
         </nav>
+        <a class="a" href="{{  url_for ('register') }}">Sign Up</a>
     </header>
  
 
@@ -119,9 +128,11 @@
     
     
     
-     <!-- Footer Section -->
+          
+<!-- Footer Section -->
 <footer>
     <!-- Social Media Links -->
+    <div class="footer_content">
     <div class="footer-column">
         <h3>Follow Us</h3>
         <ul>
@@ -149,6 +160,11 @@
             <li><a href="{{ url_for ('FQA') }}">FAQ</a></li>
             <li><a href="{{ url_for ('Privacy') }}">Privacy Policy</a></li>
         </ul>
+    </div>
+    </div>
+    
+    <div class="cp">
+    <p>&copy; 2025 Telehealth Collaboration Platform. All rights reserved. | Designed and developed with care.</p>
     </div>
 </footer>
 
