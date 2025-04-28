@@ -1,12 +1,13 @@
 import os
 import sys
-from flask import Flask, render_template, redirect, request, flash, url_for, session 
+from flask import Flask, render_template, redirect, request, flash, url_for, session, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
-from sqlalchemy import func
+from sqlalchemy import func, Column, Integer, String, Date, Time, DateTime
+from datetime import datetime
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
-from models import User, SQLASession, engine
-from dotenv import load_dotenv
+from models import User, SQLASession, engine, ScheduleAppointment
+from dotenv import load_dotenv 
 
 app = Flask(__name__)
 
@@ -14,7 +15,7 @@ app = Flask(__name__)
 SQLASession = sessionmaker(bind=engine)
 db_session = SQLASession()
 
-#setting the connection to the db and secret key
+#setting the connection to the db and secret key form the (.env) file 
 load_dotenv()
 
 DATABASE_URL = os.getenv('DATABASE_URL')
@@ -76,7 +77,7 @@ def login():
         password = request.form['password']
         mfa_code = request.form['mfa_code'].strip()
 
-        with SQLASession() as db_session:  # ✅ Correct session usage
+        with SQLASession() as db_session:
             user = db_session.query(User).filter(
                 User.user_type == user_type,
                 func.lower(User.first_name) == first_name.lower(),
@@ -94,7 +95,7 @@ def login():
         if user.user_type == 'doctor':
             return redirect(url_for('AppointOver'))
         elif user.user_type == 'patient':
-            return redirect(url_for('Upcomapp'))
+            return redirect(url_for('dashschedule'))
         elif user.user_type == 'nurse':
             return redirect(url_for('PatientRecords'))
 
@@ -133,30 +134,74 @@ def FQA():
 def Privacy():
    return render_template('Privacy.html')
 
-#route for the Upcomapp Page
-@app.route('/Upcomapp')
-def Upcomapp():
-   return render_template('Upcomapp.html')
+# |----- Patient's routes ------|
+
+#route for the dash-schedule Page
+@app.route('/dashschedule', methods=['GET', 'POST'])
+def dashschedule():
+    if request.method == 'POST':
+        try:
+            full_name = request.form['full_name']
+            age = request.form['age']
+            gender = request.form['gender']
+            reason = request.form['reason']
+            date_str = request.form['date']
+            time_str = request.form['time']
+            
+            # Parse the date and time properly
+            date = datetime.strptime(date_str, "%Y-%m-%d").date()
+            time = datetime.strptime(time_str, "%H:%M").time()
+
+            with SQLASession() as db_session:
+                new_scheduled_appointment = ScheduleAppointment(
+                   full_name=full_name,
+                   age=age,
+                   gender=gender,
+                   reason=reason,
+                   date=date,
+                   time=time
+                )
+
+                db_session.add(new_scheduled_appointment)
+                db_session.commit()
+
+            flash('Appointement Scheduled Successfully!', 'success')
+            return redirect(url_for('Consult'))
+        except SQLAlchemyError as e:
+            flash(f'Error: {e}', 'error')
+            return redirect(url_for('dashschedule'))
+
+    return render_template('dashschedule.html')
+
+#route for consult page
+@app.route('/Consult')
+def Consult():
+   return render_template('Consult.html')
 
 #route for the Mymedicines Page
 @app.route('/MyMedicines')
 def MyMedicines():
    return render_template('MyMedicines.html')
 
-#route for the Mymedicines Page
-@app.route('/MyMedinces')
-def MyMmedinces():
-   return render_template('MyMmedinces.html')
+# |----- Nurse's routes ------|
 
 #route for the Patient Records Page
 @app.route('/PatientRecords')
 def PatientRecords():
    return render_template('PatientRecords.html')
 
-#route for consult page
-@app.route('/Consult')
-def Consult():
-   return render_template('Consult.html')
+#route for MedMan page
+@app.route('/MedMan')
+def MedMan():
+   return render_template('MedMan.html')
+
+
+# |----- Doctor's routes ------|
+
+#route for Appoint-Over page
+@app.route('/AppointOver')
+def AppointOver():
+   return render_template('AppointOver.html')
 
 #route for consultations page
 @app.route('/Consultations')
@@ -167,16 +212,6 @@ def Consultations():
 @app.route('/Medicines-patient')
 def Medicinespatient():
    return render_template('Medicines-patient.html')
-
-#route for Appoint-Over page
-@app.route('/AppointOver')
-def AppointOver():
-   return render_template('AppointOver.html')
-
-#route for MedMan page
-@app.route('/MedMan')
-def MedMan():
-   return render_template('MedMan.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

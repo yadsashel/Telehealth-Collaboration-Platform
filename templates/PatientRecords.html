@@ -4,25 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css/PatientRecords.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css/Patient-Records.css') }}">
     <link rel="icon" href="../static/assets/Icons/mainIcon.png">
     <title>Patient Records</title>
 </head>
 <body>
     
          
-         <!---- Creating the navbar and the icon ----->
+        <!---- Creating the navbar and the icon ----->
      <header>
-        <a href="{{ url_for ('index') }}">
-        <img src="../static/assets/Icons/mainIcon.png" alt="Telehealth Logo">
-        </a>      
+        <div class="left-header">
+            <img src="../static/assets/Icons/mainIcon.png" alt="Logo" class="logo">
+        </div>
+    
+        <div class="right-header">
+            <div class="hamburger-menu">&#9776;</div> <!-- ☰ -->
+        </div>
+    
         <nav>
             <ul>
                 <li><a href="{{ url_for('PatientRecords') }}">Patient Record</a></li>
                 <li><a href="{{ url_for('MedMan') }}">Medicines Management</a></li>
             </ul>
         </nav>
-    </header>     
+    </header>
+  
 
 
 

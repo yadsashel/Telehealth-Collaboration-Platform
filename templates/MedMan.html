@@ -9,18 +9,26 @@
     <title>Medicines Management</title>
 </head>
 <body>
-    <!---- Creating the navbar and the icon ----->    
-    <header>
-        <a href="{{ url_for ('index') }}">
-        <img src="../static/assets/Icons/mainIcon.png" alt="Telehealth Logo">
-        </a>      
+
+    
+     <!---- Creating the navbar and the icon ----->
+     <header>
+        <div class="left-header">
+            <img src="../static/assets/Icons/mainIcon.png" alt="Logo" class="logo">
+        </div>
+    
+        <div class="right-header">
+            <div class="hamburger-menu">&#9776;</div> <!-- ☰ -->
+        </div>
+    
         <nav>
             <ul>
                 <li><a href="{{ url_for('PatientRecords') }}">Patient Record</a></li>
                 <li><a href="{{ url_for('MedMan') }}">Medicines Management</a></li>
             </ul>
         </nav>
-    </header>  
+    </header>
+
 
     <!-- Med-Management -->
     <div class="container">
