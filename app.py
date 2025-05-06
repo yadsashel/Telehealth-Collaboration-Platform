@@ -173,10 +173,13 @@ def dashschedule():
 
     return render_template('dashschedule.html')
 
-#route for consult page
+# Route to display "My Appointments" page
 @app.route('/Consult')
 def Consult():
-   return render_template('Consult.html')
+    with SQLASession() as db_session:
+        appointments = db_session.query(ScheduleAppointment).order_by(ScheduleAppointment.date.desc()).all()
+    return render_template('Consult.html', appointments=appointments)
+
 
 #route for the Mymedicines Page
 @app.route('/MyMedicines')

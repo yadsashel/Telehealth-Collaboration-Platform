@@ -46,13 +46,31 @@
 {% endwith %}
 
     
-    <div class="consultations-history">
-        <h2>Consultations History</h2>
-        <div id="history-container">
-            <!-- Scheduled appointments will appear here -->
-        </div>
-    </div>      
+<div class="appointments-section">
+    <h2 class="section-title">📅 My Scheduled Appointments</h2>
   
+    {% if appointments %}
+      <div class="appointments-container">
+        {% for app in appointments %}
+          <div class="appointment-card">
+            <div class="appointment-details">
+              <span><strong>Name:</strong> {{ app.full_name }}</span>
+              <span><strong>Age:</strong> {{ app.age }}</span>
+              <span><strong>Gender:</strong> {{ app.gender }}</span>
+              <span><strong>Reason:</strong> {{ app.reason }}</span>
+              <span><strong>Date:</strong> {{ app.date.strftime('%Y-%m-%d') }}</span>
+              <span><strong>Time:</strong> {{ app.time.strftime('%I:%M %p') }}</span>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>No appointments scheduled yet.</p>
+    {% endif %}
+  </div>
+  
+       
 
+<script src="{{ url_for ('static', filename='scripts/Consult.js') }}"></script>
 </body>
 </html>
