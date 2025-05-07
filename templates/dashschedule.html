@@ -14,7 +14,8 @@
      <!---- Creating the navbar and the icon ----->
      <header>
         <div class="left-header">
-            <img src="../static/assets/Icons/mainIcon.png" alt="Logo" class="logo">
+            
+            <a href="{{ url_for ('index') }}"><img src="../static/assets/Icons/mainIcon.png" alt="Logo" class="logo"></a>
         </div>
     
         <div class="right-header">
@@ -26,6 +27,7 @@
                 <li><a href="{{ url_for('dashschedule') }}">Schedule an Appointment</a></li>
                 <li><a href="{{ url_for('Consult') }}">My Appointments</a></li>
                 <li><a href="{{ url_for('MyMedicines') }}">My Medicines</a></li>
+                <a href="{{ url_for ('Profile') }}"><img src="" alt=""></a>
             </ul>
         </nav>
     </header>
