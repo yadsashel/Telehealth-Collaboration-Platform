@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patients</title>
+    <link rel="stylesheet" href="{{ url_for ('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="{{ url_for ('nurse_dash') }}"><span class="icon">🏠</span> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('nur_patient') }}"><span class="icon">👥</span> Patients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('nur_mess') }}"><span class="icon">✉️</span> Messages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('nur_sttg') }}"><span class="icon">⚙️</span> Settings</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <div class="nur_avatar">N</div>
+                <div class="user-info">
+                    <span class="user-role">Nurse Account</span>
+                    <span class="user-name">Michael Rodriguez</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="page-title">
+                    <button class="sidebar-toggle">☰</button>
+                    <h1>Nurse Dashboard</h1>
+                </div>
+                <div class="user-actions">
+                    <button class="notification-btn">🔔</button>
+                    <div class="nur_avatar">N</div>
+                </div>
+            </header>
+
+
+            <!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for category, message in messages %}
+        <div class="alert {{ category }}">
+          <span>{{ message }}</span>
+          <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+         <section class="profile-container">
+    <div class="user-card">
+      <div class="nur_avatar">M</div>
+      <div class="user-info">
+        <h2>Michael Rodriguez</h2>
+        <p class="user-meta">Nurse • michael.rodriguez@medicare.com</p>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="account">👤 Account</button>
+      <button class="tab" data-tab="security">🛡️ Security</button>
+      <button class="tab" data-tab="notifications">🔔 Notifications</button>
+    </div>
+
+    <div class="tab-content active" id="account">
+      <div class="card">
+        <h3>Profile Information</h3>
+        <p>Update your account information.</p>
+        <form>
+          <label>Full Name
+            <input type="text" value="Michael Rodriguez" name="fullName" />
+          </label>
+
+          <label>Email
+            <input type="email" value="michael.rodriguez@medicare.com" name="email" />
+          </label>
+
+          <label>Phone Number
+            <input type="tel" value="+1 (555) 987-6543" name="phoneNumber" />
+          </label>
+
+          <label>Bio
+            <textarea name="bio">Registered nurse with specialization in emergency care and patient management.</textarea>
+          </label>
+
+          <div class="form-actions">
+            <button type="submit">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="tab-content" id="security">
+      <div class="card">
+        <p>Security settings go here.</p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="notifications">
+      <div class="card">
+        <p>Notification settings go here.</p>
+      </div>
+    </div>
+  </section>
+
+    </div>
+
+</body>
+</html>

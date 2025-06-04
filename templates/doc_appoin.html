@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments</title>
+    <link rel="stylesheet" href="{{ url_for ('static', filename='css/styles.css') }}">
+</head>
+<body>
+    
+    <div class="dashboard-container" id="dashboard-doctor">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="{{ url_for ('doctor_dash') }}"><span class="icon">🏠</span> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('doc_appoin') }}"><span class="icon">📅</span> Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('doc_patient') }}"><span class="icon">👥</span> Patients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('doc_mess') }}"><span class="icon">✉️</span> Messages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('doc_sttg') }}"><span class="icon">⚙️</span> Settings</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">D</div>
+                <div class="user-info">
+                    <span class="user-role">Doctor Account</span>
+                    <span class="user-name">Dr. Sarah Johnson</span>
+                </div>
+            </div>
+        </aside>
+
+        
+
+        <!-- Appointments - Section -->
+<section class="appointments-section" id="appointements">
+  <div class="appointments-header">
+    <h2>Today's Appointments</h2>
+    <button class="calendar-btn">
+      <i class="icon-calendar"></i> View Calendar
+    </button>
+  </div>
+
+  <header class="top-bar">
+              <div class="page-title">
+                   <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+                   <h1>Doctor Dashboard</h1>
+                </div>
+                <div class="user-actions">
+                   <button class="notification-btn">🔔</button>
+                <div class="avatar">D</div>
+              </div>
+  </header>
+
+  <!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for category, message in messages %}
+        <div class="alert {{ category }}">
+          <span>{{ message }}</span>
+          <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+  <!-- Appointment Card -->
+  <div class="appointment-card">
+    <div class="avatar">S</div>
+    <div class="appointment-info">
+      <div class="appointment-name-time">
+        <strong>Sarah Johnson</strong>
+        <span class="time">🕘 9:00 AM</span>
+        <span class="status confirmed">Confirmed</span>
+      </div>
+      <p>Persistent headache and mild fever for 3 days</p>
+    </div>
+    <div class="appointment-actions">
+      <button class="btn primary">📹 Start Call</button>
+      <button class="btn">💬 Message</button>
+    </div>
+  </div>
+
+  <div class="appointment-card">
+    <div class="avatar">M</div>
+    <div class="appointment-info">
+      <div class="appointment-name-time">
+        <strong>Mike Davis</strong>
+        <span class="time">🕥 10:30 AM</span>
+        <span class="status checkedin">Checked-In</span>
+      </div>
+      <p>Follow-up on knee surgery recovery</p>
+    </div>
+    <div class="appointment-actions">
+      <button class="btn">💬 Message</button>
+    </div>
+  </div>
+
+  <div class="appointment-card">
+    <div class="avatar">E</div>
+    <div class="appointment-info">
+      <div class="appointment-name-time">
+        <strong>Emily White</strong>
+        <span class="time">🕐 1:15 PM</span>
+        <span class="status confirmed">Confirmed</span>
+      </div>
+      <p>Annual check-up and prescription renewal</p>
+    </div>
+    <div class="appointment-actions">
+      <button class="btn primary">📹 Start Call</button>
+      <button class="btn">💬 Message</button>
+    </div>
+  </div>
+
+  <div class="appointment-card">
+    <div class="avatar">R</div>
+    <div class="appointment-info">
+      <div class="appointment-name-time">
+        <strong>Robert Chen</strong>
+        <span class="time">🕒 3:00 PM</span>
+        <span class="status pending">Pending</span>
+      </div>
+      <p>Chest pain and shortness of breath</p>
+    </div>
+    <div class="appointment-actions">
+      <button class="btn">💬 Message</button>
+    </div>
+  </div>
+</section>
+
+</div>
+        
+                    
+<script src="{{ url_for ('static', filename='scripts/scripts.js') }}"></script>
+</body>
+</html>

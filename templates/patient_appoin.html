@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for ('static', filename='css/styles.css') }}">
+</head>
+<body>
+   
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="app-logo">MediCare</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="{{ url_for ('patient_dash') }}"><span class="icon">🏠</span> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('patient_appoin') }}"><span class="icon">📅</span> Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('patient_mess') }}"><span class="icon">✉️</span> Messages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('patient_prf') }}"><span class="icon">👤</span> Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('patient_sttg') }}"><span class="icon">⚙️</span> Settings</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">P</div>
+                <div class="user-info">
+                    <span class="user-role">Patient Account</span>
+                    <span class="user-name">Emma Wilson</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="page-title">
+                    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+                    <h1>Patient Dashboard</h1>
+                </div>
+                <div class="user-actions">
+                    <button class="notification-btn">🔔</button>
+                    <div class="avatar">P</div>
+                </div>
+            </header>
+
+
+            <!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for category, message in messages %}
+        <div class="alert {{ category }}">
+          <span>{{ message }}</span>
+          <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+            <!-- ====== patient appointements ===== -->
+            <div class="appointment-card">
+  <div class="appointment-header">
+    <h3>Appointments</h3>
+    <p>View or book your appointments</p>
+  </div>
+
+  <div class="appointment-tabs">
+    <div class="tab-buttons">
+      <button class="tab active" onclick="showTab(event, 'upcoming')">Upcoming</button>
+      <button class="tab" onclick="showTab(event, 'past')">Past</button>
+    </div>
+
+    <div id="upcoming" class="tab-content active">
+      <div class="appointment-entry">
+        <div class="doctor-info">
+          <div class="doctor-header">
+            <h4>Dr. Maria Garcia</h4>
+            <span class="status confirmed">confirmed</span>
+          </div>
+          <p class="specialty">Cardiology</p>
+          <div class="appointment-meta">
+            <div class="meta-item"><span class="icon">📅</span> <span>May 23, 2023</span></div>
+            <div class="meta-item"><span class="icon">⏰</span> <span>10:30 AM</span></div>
+          </div>
+        </div>
+        <div class="appointment-actions">
+          <button class="btn primary">Join Video Call</button>
+          <button class="btn cancel">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="past" class="tab-content">
+      <!-- Past appointments go here -->
+    </div>
+  </div>
+
+  <div class="book-btn-container">
+    <button class="btn primary full-width" onclick="toggleModal()">
+      <span class="icon">➕</span> Book New Appointment
+    </button>
+  </div>
+
+   <!-- Appointment Booking Modal -->
+                    <div id="appointmentModal" class="modal hidden">
+                        <div class="modal-content">
+                                <button class="close-btn" onclick="toggleModal(false)">×</button>
+                                <h2>Book an Appointment</h2>
+                                <p>Select your preferred doctor, date, and time.</p>
+
+                            <form>
+                                <label for="appointmentType">Appointment Type</label>
+                                <select id="appointmentType" required>
+                                   <option>Select appointment type</option>
+                                   <option>Doctor Visit</option>
+                                   <option>Prescription Refill</option>
+                                   <option>Lab Tests</option>
+                                </select>
+
+                                <label for="doctor">Select Doctor</label>
+                                <select id="doctor" required>
+                                   <option>Choose a doctor</option>
+                                   <option>Dr. Sarah Johnson</option>
+                                   <option>Dr. Ahmed Nouri</option>
+                                   </select>
+
+                                <label for="date">Preferred Date</label>
+                                <input type="date" id="date" required>
+
+                                <label for="time">Preferred Time</label>
+                                <input type="time" id="time" required>
+
+                                <label for="reason">Reason</label>
+                                <textarea id="reason" placeholder="Brief description..." required></textarea>
+
+                                <button type="submit" class="submit-btn">Book Appointment</button>
+                            </form>
+                        </div>
+                    </div>
+
+</div>
+
+
+
+<script src="{{ url_for ('static', filename='scripts/scripts.js') }}"></script>
+</body>
+</html>

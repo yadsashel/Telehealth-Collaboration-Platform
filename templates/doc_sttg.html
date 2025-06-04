@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="{{ url_for ('static', filename='css/styles.css') }}">
+</head>
+<body>
+    
+    <div class="dashboard-container" id="dashboard-doctor">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="{{ url_for ('doctor_dash') }}"><span class="icon">🏠</span> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('doc_appoin') }}"><span class="icon">📅</span> Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('doc_patient') }}"><span class="icon">👥</span> Patients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('doc_mess') }}"><span class="icon">✉️</span> Messages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('doc_sttg') }}"><span class="icon">⚙️</span> Settings</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">D</div>
+                <div class="user-info">
+                    <span class="user-role">Doctor Account</span>
+                    <span class="user-name">Dr. Sarah Johnson</span>
+                </div>
+            </div>
+        </aside>
+
+
+  <header class="top-bar">
+              <div class="page-title">
+                   <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+                   <h1>Doctor Dashboard</h1>
+                </div>
+                <div class="user-actions">
+                   <button class="notification-btn">🔔</button>
+                <div class="avatar">D</div>
+              </div>
+  </header>
+
+
+  <!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for category, message in messages %}
+        <div class="alert {{ category }}">
+          <span>{{ message }}</span>
+          <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+          
+  <!-- Profile Setting + Tabs Section -->
+<section class="profile-settings">
+  <div class="profile-card">
+    <div class="avatar">D</div>
+    <div>
+      <h2 class="profile-name">Dr. Sarah Johnson</h2>
+      <p class="profile-email">Doctor • sarah.johnson@medicare.com</p>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab" onclick="showTab('account')">
+      <span class="tab-icon">👤</span><span class="tab-text">Account</span>
+    </button>
+    <button class="tab" onclick="showTab('security')">
+      <span class="tab-icon">🛡️</span><span class="tab-text">Security</span>
+    </button>
+    <button class="tab active" onclick="showTab('notifications')">
+      <span class="tab-icon">🔔</span><span class="tab-text">Notifications</span>
+    </button>
+  </div>
+
+  <div class="tab-content" id="notifications">
+    <div class="card">
+      <h3 class="card-title">Notification Settings</h3>
+      <p class="card-subtitle">Configure how you receive notifications.</p>
+      <div class="notif-settings">
+        <div class="notif-item">
+          <div>
+            <h4>Email Notifications</h4>
+            <p>Receive email notifications for important updates.</p>
+          </div>
+          <button class="configure-btn">Configure</button>
+        </div>
+        <div class="notif-item">
+          <div>
+            <h4>System Notifications</h4>
+            <p>Receive in-app notifications.</p>
+          </div>
+          <button class="configure-btn">Configure</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    
+    </div>
+                    
+<script src="{{ url_for ('static', filename='scripts/scripts.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messagse</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for ('static', filename='css/styles.css') }}">
+</head>
+<body>
+   
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="app-logo">MediCare</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="{{ url_for ('patient_dash') }}"><span class="icon">🏠</span> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('patient_appoin') }}"><span class="icon">📅</span> Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('patient_mess') }}"><span class="icon">✉️</span> Messages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('patient_prf') }}"><span class="icon">👤</span> Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('patient_sttg') }}"><span class="icon">⚙️</span> Settings</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">P</div>
+                <div class="user-info">
+                    <span class="user-role">Patient Account</span>
+                    <span class="user-name">Emma Wilson</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="page-title">
+                    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+                    <h1>Patient Dashboard</h1>
+                </div>
+                <div class="user-actions">
+                    <button class="notification-btn">🔔</button>
+                    <div class="avatar">P</div>
+                </div>
+            </header>
+
+
+            <!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for category, message in messages %}
+        <div class="alert {{ category }}">
+          <span>{{ message }}</span>
+          <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+                            
+                    <section class="health-summary-section">
+  <div class="health-summary-container">
+    <div class="health-summary-header">
+      <h3 class="health-summary-title">Health Summary</h3>
+    </div>
+
+    <div class="health-tabs-wrapper">
+      <div class="health-tabs" role="tablist">
+        <button class="health-tab active" data-tab="vitals">Vital Stats</button>
+        <button class="health-tab" data-tab="medications">Medications</button>
+        <button class="health-tab" data-tab="records">Records</button>
+      </div>
+
+      <div class="health-tab-content" id="vitals" data-visible="true">
+        <div class="vitals-grid">
+          <div class="vital-card">
+            <div class="vital-icon heart-icon"></div>
+            <div>
+              <p class="vital-label">Heart Rate</p>
+              <p class="vital-value">72 <span>bpm</span></p>
+            </div>
+          </div>
+
+          <div class="vital-card">
+            <div class="vital-icon pressure-icon"></div>
+            <div>
+              <p class="vital-label">Blood Pressure</p>
+              <p class="vital-value">122/78 <span>mmHg</span></p>
+            </div>
+          </div>
+
+          <div class="vital-card">
+            <div class="vital-icon bmi-icon"></div>
+            <div>
+              <p class="vital-label">BMI</p>
+              <p class="vital-value">23.4 <span class="badge normal">Normal</span></p>
+            </div>
+          </div>
+
+          <div class="vital-card">
+            <div class="vital-icon sugar-icon"></div>
+            <div>
+              <p class="vital-label">Blood Sugar</p>
+              <p class="vital-value">110 <span>mg/dL</span> <span class="badge warning">Monitor</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="health-tab-content" id="medications" data-visible="false">
+        <!-- Medication content goes here -->
+      </div>
+
+      <div class="health-tab-content" id="records" data-visible="false">
+        <!-- Records content goes here -->
+      </div>
+    </div>
+  </div>
+
+  <div class="personal-info-section">
+    <h2>Personal Information</h2>
+    <p>Manage your personal details and contact information.</p>
+  </div>
+</section>
+
+
+</div>
+
+
+
+<script src="{{ url_for ('static', filename='scripts/scripts.js') }}"></script>
+</body>
+</html>

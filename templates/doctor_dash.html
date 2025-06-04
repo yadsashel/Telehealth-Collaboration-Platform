@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard - Welcome</title>
+    <link rel="stylesheet" href="{{ url_for ('static', filename='css/styles.css') }}">
+</head>
+<body>
+    
+    <div class="dashboard-container" id="dashboard-doctor">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="{{ url_for ('doctor_dash') }}"><span class="icon">🏠</span> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('doc_appoin') }}"><span class="icon">📅</span> Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('doc_patient') }}"><span class="icon">👥</span> Patients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('doc_mess') }}"><span class="icon">✉️</span> Messages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('doc_sttg') }}"><span class="icon">⚙️</span> Settings</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">D</div>
+                <div class="user-info">
+                    <span class="user-role">Doctor Account</span>
+                    <span class="user-name">Dr. Sarah Johnson</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+              <div class="page-title">
+                   <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+                   <h1>Doctor Dashboard</h1>
+                </div>
+                <div class="user-actions">
+                   <button class="notification-btn">🔔</button>
+                <div class="avatar">D</div>
+              </div>
+            </header>
+
+            <!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for category, message in messages %}
+        <div class="alert {{ category }}">
+          <span>{{ message }}</span>
+          <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+
+            <div class="dashboard-content">
+                <!-- Patient Stats -->
+                <section class="dashboard-card patient-stats">
+                    <h2>Patient Statistics</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>Total Patients</h3>
+                            <p class="stat-value">126</p>
+                            <p class="stat-change positive">+5% this month</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>New Patients</h3>
+                            <p class="stat-value">12</p>
+                            <p class="stat-change positive">+2 this week</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Appointments</h3>
+                            <p class="stat-value">28</p>
+                            <p class="stat-change">This week</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Follow-ups</h3>
+                            <p class="stat-value">14</p>
+                            <p class="stat-change negative">-2 since last week</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Two Column Layout -->
+                <div class="two-column-grid">
+                    <!-- Appointments -->
+                    <section class="dashboard-card appointments">
+                        <h2>Today's Appointments</h2>
+                        <ul class="appointment-list">
+                            <li class="appointment-item">
+                                <div class="time">09:00 AM</div>
+                                <div class="avatar">P</div>
+                                <div class="appointment-details">
+                                    <h4>Emma Wilson</h4>
+                                    <p>Annual Check-up</p>
+                                </div>
+                                <div class="appointment-status confirmed">Confirmed</div>
+                            </li>
+                            <li class="appointment-item">
+                                <div class="time">10:30 AM</div>
+                                <div class="avatar">P</div>
+                                <div class="appointment-details">
+                                    <h4>John Smith</h4>
+                                    <p>Follow-up Consultation</p>
+                                </div>
+                                <div class="appointment-status pending">Pending</div>
+                            </li>
+                            <li class="appointment-item">
+                                <div class="time">02:00 PM</div>
+                                <div class="avatar">P</div>
+                                <div class="appointment-details">
+                                    <h4>Michael Brown</h4>
+                                    <p>Lab Results Discussion</p>
+                                </div>
+                                <div class="appointment-status confirmed">Confirmed</div>
+                            </li>
+                        </ul>
+                        <button class="view-all-btn">View All Appointments</button>
+                    </section>
+
+                    <!-- Right Column -->
+                    <div class="right-column">
+                        <!-- AI Insights -->
+                        <section class="dashboard-card ai-insights">
+                            <h2>AI Insights</h2>
+                            <div class="insight-card">
+                                <div class="insight-icon">💡</div>
+                                <div class="insight-content">
+                                    <h4>Patient Trend Detected</h4>
+                                    <p>3 of your patients have reported similar symptoms this week.</p>
+                                </div>
+                            </div>
+                            <div class="insight-card">
+                                <div class="insight-icon">📈</div>
+                                <div class="insight-content">
+                                    <h4>Treatment Effectiveness</h4>
+                                    <p>85% improvement in patients using the new treatment protocol.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Patient Activity -->
+                        <section class="dashboard-card patient-activity">
+                            <h2>Recent Patient Activity</h2>
+                            <ul class="activity-list">
+                                <li class="activity-item">
+                                    <div class="activity-time">Today</div>
+                                    <div class="activity-icon test">📋</div>
+                                    <div class="activity-details">
+                                        <h4>Lab Results Available</h4>
+                                        <p>Emma Wilson's blood work results uploaded</p>
+                                    </div>
+                                </li>
+                                <li class="activity-item">
+                                    <div class="activity-time">Yesterday</div>
+                                    <div class="activity-icon medicine">💊</div>
+                                    <div class="activity-details">
+                                        <h4>Prescription Renewed</h4>
+                                        <p>John Smith requested medication renewal</p>
+                                    </div>
+                                </li>
+                                <li class="activity-item">
+                                    <div class="activity-time">2 days ago</div>
+                                    <div class="activity-icon appointment">📅</div>
+                                    <div class="activity-details">
+                                        <h4>Appointment Rescheduled</h4>
+                                        <p>Michael Brown moved to next week</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+<script src="{{ url_for ('static', filename='scripts/scripts.js') }}"></script>
+</body>
+</html>

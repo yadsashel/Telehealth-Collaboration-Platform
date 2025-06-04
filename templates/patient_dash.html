@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for ('static', filename='css/styles.css') }}">
+</head>
+<body>
+   
+<div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="app-logo">MediCare</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="#"><span class="icon">🏠</span> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('patient_appoin') }}"><span class="icon">📅</span>Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('patient_mess') }}"><span class="icon">✉️</span> Messages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('patient_prf') }}"><span class="icon">👤</span> Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('patient_sttg') }}"><span class="icon">⚙️</span> Settings</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">P</div>
+                <div class="user-info">
+                    <span class="user-role">Patient Account</span>
+                    <span class="user-name">Emma Wilson</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="page-title">
+                    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+                    <h1>Patient Dashboard</h1>
+                </div>
+                <div class="user-actions">
+                    <button class="notification-btn">🔔</button>
+                    <div class="avatar">P</div>
+                </div>
+            </header>
+
+
+            <!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for category, message in messages %}
+        <div class="alert {{ category }}">
+          <span>{{ message }}</span>
+          <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+            <!-- main patient content - dashboard -->
+            <div class="dashboard-content">
+                <!-- Two Column Layout -->
+                <div class="two-column-grid">
+                    <!-- Appointment Booking -->
+                    <section class="dashboard-card appointment-booking">
+                        <h2>Schedule an Appointment</h2>
+                        
+                        <div class="appointment-types">
+                            <div class="appointment-type" onclick="toggleModal()">
+                                <div class="appointment-icon">👨‍⚕️</div>
+                                <div class="appointment-text">
+                                    <h3>Doctor Visit</h3>
+                                    <p>Schedule a checkup or consultation</p>
+                                </div>
+                            </div>
+                            <div class="appointment-type" onclick="toggleModal()">
+                                <div class="appointment-icon">💊</div>
+                                <div class="appointment-text">
+                                    <h3>Prescription Refill</h3>
+                                    <p>Request medication refills</p>
+                                </div>
+                            </div>
+                            <div class="appointment-type" onclick="toggleModal()">
+                                <div class="appointment-icon">🔬</div>
+                                <div class="appointment-text">
+                                    <h3>Lab Tests</h3>
+                                    <p>Schedule blood work and other tests</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="upcoming-title">Upcoming Appointments</h3>
+                        <div class="upcoming-appointment">
+                            <div class="appointment-date">
+                                <div class="month">May</div>
+                                <div class="day">28</div>
+                            </div>
+                            <div class="appointment-info">
+                                <h4>Annual Physical Exam</h4>
+                                <p>Dr. Sarah Johnson • 10:00 AM</p>
+                            </div>
+                            <div class="appointment-actions">
+                                <button class="action-btn">Reschedule</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Appointment Booking Modal -->
+                    <div id="appointmentModal" class="modal hidden">
+                        <div class="modal-content">
+                                <button class="close-btn" onclick="toggleModal(false)">×</button>
+                                <h2>Book an Appointment</h2>
+                                <p>Select your preferred doctor, date, and time.</p>
+
+                            <form>
+                                <label for="appointmentType">Appointment Type</label>
+                                <select id="appointmentType" required>
+                                   <option>Select appointment type</option>
+                                   <option>Doctor Visit</option>
+                                   <option>Prescription Refill</option>
+                                   <option>Lab Tests</option>
+                                </select>
+
+                                <label for="doctor">Select Doctor</label>
+                                <select id="doctor" required>
+                                   <option>Choose a doctor</option>
+                                   <option>Dr. Sarah Johnson</option>
+                                   <option>Dr. Ahmed Nouri</option>
+                                   </select>
+
+                                <label for="date">Preferred Date</label>
+                                <input type="date" id="date" required>
+
+                                <label for="time">Preferred Time</label>
+                                <input type="time" id="time" required>
+
+                                <label for="reason">Reason</label>
+                                <textarea id="reason" placeholder="Brief description..." required></textarea>
+
+                                <button type="submit" class="submit-btn">Book Appointment</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Health Summary -->
+                    <section class="dashboard-card health-summary">
+                        <h2>Health Summary</h2>
+                        
+                        <div class="vital-signs">
+                            <div class="vital-sign">
+                                <div class="vital-icon heart-rate">❤️</div>
+                                <div class="vital-details">
+                                    <h3>Heart Rate</h3>
+                                    <p class="vital-value">72 bpm</p>
+                                    <p class="vital-range">Normal range: 60-100 bpm</p>
+                                </div>
+                            </div>
+                            <div class="vital-sign">
+                                <div class="vital-icon blood-pressure">🩸</div>
+                                <div class="vital-details">
+                                    <h3>Blood Pressure</h3>
+                                    <p class="vital-value">120/80</p>
+                                    <p class="vital-range">Normal range: 90-120/60-80</p>
+                                </div>
+                            </div>
+                            <div class="vital-sign">
+                                <div class="vital-icon weight">⚖️</div>
+                                <div class="vital-details">
+                                    <h3>Weight</h3>
+                                    <p class="vital-value">140 lbs</p>
+                                    <p class="vital-trend positive">↓ 2 lbs from last visit</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="medications">
+                            <h3>Current Medications</h3>
+                            <ul class="medication-list">
+                                <li class="medication-item">
+                                    <div class="medication-name">Lisinopril 10mg</div>
+                                    <div class="medication-schedule">Once daily</div>
+                                </li>
+                                <li class="medication-item">
+                                    <div class="medication-name">Metformin 500mg</div>
+                                    <div class="medication-schedule">Twice daily</div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <button class="view-all-btn">View Complete Health Record</button>
+                    </section>
+                </div>
+
+                <!-- Messages -->
+                <section class="dashboard-card messages">
+                    <h2>Messages</h2>
+                    
+                    <div class="message-options">
+                        <div class="message-tabs">
+                            <button class="message-tab active">Inbox (2)</button>
+                            <button class="message-tab">Sent</button>
+                        </div>
+                        <button class="new-message-btn">New Message</button>
+                    </div>
+                    
+                    <ul class="message-list">
+                        <li class="message-item unread">
+                            <div class="message-sender">
+                                <div class="avatar small">D</div>
+                                <div class="sender-details">
+                                    <h4>Dr. Sarah Johnson</h4>
+                                    <p class="sender-role">Cardiologist</p>
+                                </div>
+                            </div>
+                            <div class="message-preview">
+                                <h4>Follow-up on your recent visit</h4>
+                                <p>I wanted to check in on how you're feeling after our appointment last week...</p>
+                            </div>
+                            <div class="message-time">10:23 AM</div>
+                        </li>
+                        <li class="message-item unread">
+                            <div class="message-sender">
+                                <div class="avatar small">N</div>
+                                <div class="sender-details">
+                                    <h4>Nurse Michael</h4>
+                                    <p class="sender-role">Registered Nurse</p>
+                                </div>
+                            </div>
+                            <div class="message-preview">
+                                <h4>Prescription Ready for Pickup</h4>
+                                <p>Your prescription has been prepared and is ready for pickup at the pharmacy...</p> 
+                            </div>
+                            <div class="message-time">Yesterday</div>
+                        </li>
+                        <li class="message-item">
+                            <div class="message-sender">
+                                <div class="avatar small">D</div>
+                                <div class="sender-details">
+                                    <h4>Dr. Emily Chen</h4>
+                                    <p class="sender-role">Primary Care Physician</p>
+                                </div>
+                            </div>
+                            <div class="message-preview">
+                                <h4>Lab Results Available</h4>
+                                <p>Your recent lab results are now available. Overall, everything looks good...</p>
+                            </div>
+                            <div class="message-time">May 20</div>
+                        </li>
+                    </ul>
+                    
+                    <button class="view-all-btn">View All Messages</button>
+                </section>
+            </div>
+        </main>
+
+
+        <!-- ===== AI Assistant Section ===== -->
+<section class="ai-chat-section" style="padding: 2rem; max-width: 600px; margin: 40px auto;">
+  <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Ask Your AI Assistant</h2>
+  <textarea id="userPrompt" placeholder="Enter your question here..." style="width: 100%; height: 100px; padding: 1rem; margin-bottom: 1rem;"></textarea>
+  <button id="askBtn" style="padding: 0.5rem 1rem; background-color: #3498db; color: white; border: none; cursor: pointer;">Ask</button>
+  <div id="aiResponse" class="ai-response" style="white-space: pre-line; margin-top: 1rem; background: #f9f9f9; padding: 1rem; border-radius: 8px;"></div>
+</section>
+
+
+    </div>
+
+
+<script src="{{ url_for ('static', filename='scripts/scripts.js') }}"></script>
+</body>
+</html>

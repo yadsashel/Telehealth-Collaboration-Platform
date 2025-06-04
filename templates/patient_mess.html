@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messagse</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for ('static', filename='css/styles.css') }}">
+</head>
+<body>
+   
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="app-logo">MediCare</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="{{ url_for ('patient_dash') }}"><span class="icon">🏠</span> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('patient_appoin') }}"><span class="icon">📅</span> Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('patient_mess') }}"><span class="icon">✉️</span> Messages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('patient_prf') }}"><span class="icon">👤</span> Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('patient_sttg') }}"><span class="icon">⚙️</span> Settings</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">P</div>
+                <div class="user-info">
+                    <span class="user-role">Patient Account</span>
+                    <span class="user-name">Emma Wilson</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="page-title">
+                    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+                    <h1>Patient Dashboard</h1>
+                </div>
+                <div class="user-actions">
+                    <button class="notification-btn">🔔</button>
+                    <div class="avatar">P</div>
+                </div>
+            </header>
+
+
+            <!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for category, message in messages %}
+        <div class="alert {{ category }}">
+          <span>{{ message }}</span>
+          <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+                            
+            <section class="msg-container">
+  <div class="msg-card">
+    <div class="msg-header">
+      <h3 class="msg-title">Messages</h3>
+    </div>
+    <div class="msg-body">
+      <div class="msg-sidebar">
+        <div class="msg-new">
+          <button class="msg-btn msg-new-btn">➕ New Message</button>
+        </div>
+        <div class="msg-list">
+          <div class="msg-user active">
+            <div class="msg-avatar">D</div>
+            <div class="msg-info">
+              <h4>Dr. John Smith</h4>
+              <span class="msg-time">Yesterday</span>
+              <p>Your test results look good. Let’s discuss during your next appointment.</p>
+            </div>
+          </div>
+          <div class="msg-user">
+            <div class="msg-avatar">D</div>
+            <div class="msg-info">
+              <h4>Dr. Maria Garcia</h4>
+              <span class="msg-time">2 days ago</span>
+              <p>How are you feeling with the new medication?</p>
+            </div>
+          </div>
+          <div class="msg-user">
+            <div class="msg-avatar">N</div>
+            <div class="msg-info">
+              <h4>Nurse Wilson</h4>
+              <span class="msg-time">1 week ago</span>
+              <p>Your prescription has been sent to the pharmacy.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="msg-chat">
+        <div class="msg-chat-header">
+          <div class="msg-chat-user">
+            <div class="msg-avatar small">D</div>
+            <div>
+              <h4>Dr. John Smith</h4>
+              <span class="msg-status online">● online</span>
+            </div>
+          </div>
+          <button class="msg-btn msg-view-btn">View Profile</button>
+        </div>
+        <div class="msg-chat-content">
+          <div class="msg-bubble left">
+            <p>Hello Sarah, I’m reviewing your recent lab results.</p>
+            <span class="msg-time">10:30 AM</span>
+          </div>
+          <div class="msg-bubble right">
+            <p>Hi Dr. Smith, thank you for taking the time to check those. I was a bit worried.</p>
+            <span class="msg-time">10:32 AM</span>
+          </div>
+          <div class="msg-bubble left">
+            <p>No need to worry! Your test results look good. There's just a slight elevation in your cholesterol.</p>
+            <span class="msg-time">10:35 AM</span>
+          </div>
+          <div class="msg-bubble left">
+            <p>Let's discuss dietary changes during your next appointment.</p>
+            <span class="msg-time">10:36 AM</span>
+          </div>
+          <div class="msg-bubble right">
+            <p>That's a relief. I'll prepare some questions for our next meeting.</p>
+            <span class="msg-time">10:38 AM</span>
+          </div>
+        </div>
+        <div class="msg-chat-input">
+          <button class="msg-btn icon">📎</button>
+          <input type="text" class="msg-input" placeholder="Type your message..." />
+          <button class="msg-btn msg-send-btn">📤 Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+
+
+<script src="{{ url_for ('static', filename='scripts/scripts.js') }}"></script>
+</body>
+</html>

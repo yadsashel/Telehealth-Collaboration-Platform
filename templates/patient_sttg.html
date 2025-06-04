@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messagse</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for ('static', filename='css/styles.css') }}">
+</head>
+<body>
+   
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="app-logo">MediCare</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="{{ url_for ('patient_dash') }}"><span class="icon">🏠</span> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('patient_appoin') }}"><span class="icon">📅</span> Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('patient_mess') }}"><span class="icon">✉️</span> Messages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('patient_prf') }}"><span class="icon">👤</span> Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('patient_sttg') }}"><span class="icon">⚙️</span> Settings</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">P</div>
+                <div class="user-info">
+                    <span class="user-role">Patient Account</span>
+                    <span class="user-name">Emma Wilson</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="page-title">
+                    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+                    <h1>Patient Dashboard</h1>
+                </div>
+                <div class="user-actions">
+                    <button class="notification-btn">🔔</button>
+                    <div class="avatar">P</div>
+                </div>
+            </header>
+
+            <!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for category, message in messages %}
+        <div class="alert {{ category }}">
+          <span>{{ message }}</span>
+          <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+                            
+            <section class="profile-section-container">
+  <div class="profile-card">
+    <div class="profile-avatar">E</div>
+    <div class="profile-info">
+      <h2>Emma Wilson</h2>
+      <p class="profile-subtext">Patient • emma.wilson@example.com</p>
+    </div>
+  </div>
+
+  <div class="profile-tabs">
+    <div class="tab-buttons">
+      <button class="tab-btn active" data-tab="account-tab">Account</button>
+      <button class="tab-btn" data-tab="security-tab">Security</button>
+      <button class="tab-btn" data-tab="notifications-tab">Notifications</button>
+    </div>
+
+    <div class="tab-content" id="account-tab">
+      <h3>Profile Information</h3>
+      <p class="profile-tab-desc">Update your account information.</p>
+      <form class="profile-form">
+        <label>Full Name
+          <input type="text" value="Emma Wilson" name="fullName" />
+        </label>
+        <label>Email
+          <input type="email" value="emma.wilson@example.com" name="email" />
+        </label>
+        <label>Phone Number
+          <input type="text" value="+1 (555) 234-5678" name="phoneNumber" />
+        </label>
+        <label>Bio
+          <textarea name="bio" placeholder="Tell us about yourself as a patient..."></textarea>
+        </label>
+        <div class="save-btn-wrapper">
+          <button type="submit">Save Changes</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="tab-content hidden" id="security-tab">
+      <p>Security settings coming soon.</p>
+    </div>
+
+    <div class="tab-content hidden" id="notifications-tab">
+      <p>Notifications settings coming soon.</p>
+    </div>
+  </div>
+</section>
+
+
+
+</div>
+
+
+
+<script src="{{ url_for ('static', filename='scripts/scripts.js') }}"></script>
+</body>
+</html>

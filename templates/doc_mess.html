@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages</title>
+    <link rel="stylesheet" href="{{ url_for ('static', filename='css/styles.css') }}">
+</head>
+<body>
+    
+    <div class="dashboard-container" id="dashboard-doctor">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="{{ url_for ('doctor_dash') }}"><span class="icon">🏠</span> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('doc_appoin') }}"><span class="icon">📅</span> Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('doc_patient') }}"><span class="icon">👥</span> Patients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('doc_mess') }}"><span class="icon">✉️</span> Messages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for ('doc_sttg') }}"><span class="icon">⚙️</span> Settings</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">D</div>
+                <div class="user-info">
+                    <span class="user-role">Doctor Account</span>
+                    <span class="user-name">Dr. Sarah Johnson</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Appointments - Section -->
+<section class="appointments-section" id="appointements">
+  <div class="appointments-header">
+    <h2>Messages</h2>
+  </div>
+
+  <header class="top-bar">
+              <div class="page-title">
+                   <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+                   <h1>Doctor Dashboard</h1>
+                </div>
+                <div class="user-actions">
+                   <button class="notification-btn">🔔</button>
+                <div class="avatar">D</div>
+              </div>
+  </header>
+
+  <!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for category, message in messages %}
+        <div class="alert {{ category }}">
+          <span>{{ message }}</span>
+          <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+   <!-- doctors -  messages -->
+  <div class="msg-box">
+  <h2 class="msg-title">Messages Center</h2>
+  <p class="msg-text">You have no unread messages.</p>
+</div>
+
+    
+    </div>
+                    
+<script src="{{ url_for ('static', filename='scripts/scripts.js') }}"></script>
+</body>
+</html>
