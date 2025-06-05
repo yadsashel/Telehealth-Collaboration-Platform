@@ -160,6 +160,13 @@ def login():
 
     return render_template('login.html')
 
+#route for logout
+@app.route('/logout')
+def logout(): 
+        session.clear()
+        flash('Logged out successfully!', 'success')
+        return redirect(url_for('login'))
+
 # ==== route for the patient dashboard && it's compenents ====
 @app.route('/patient_dash')
 def patient_dash():
