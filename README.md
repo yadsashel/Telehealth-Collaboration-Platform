@@ -1,7 +1,7 @@
 📄 Updated README.md:
 
 ````markdown
-![Telehealth Logo](./static/assets/Icons/mainIcon.png)
+![Telehealth Logo](../static/assets/Icons/mainIcon.png)
 
 # Telehealth Collaboration Platform
 
