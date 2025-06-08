@@ -168,20 +168,6 @@ Telehealth-Collaboration-Platform-MVP/
 
 ---
 
-## 📈 Progress
-
-| Feature                   | Status  |
-| ------------------------- | ------- |
-| Role-based auth           | ✅ Done  |
-| Appointments & records    | ✅ Done  |
-| AI summarization          | ✅ Done  |
-| Voice-to-text             | ✅ Done  |
-| Analytics dashboard       | 🔄 WIP  |
-| Immersive 3D clinic scene | 🧪 Beta |
-| Mobile responsiveness     | ✅ Done  |
-
----
-
 ## 🤝 Contributions
 
 We welcome clean, well-documented pull requests! Here’s how you can help:
