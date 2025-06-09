@@ -215,9 +215,9 @@ img {
 /* === Modal Styles === */
 .modal {
   position: fixed;
-  top: 50%;
+  top: 55%;
   left: 50%;
-  width: 90%;
+  width: 403px;
   max-width: 500px;
   background: #fff;
   border: 1px solid #ccc;
@@ -230,9 +230,8 @@ img {
 }
 
 .modal.show {
-  display: block;
+  display: flex;
 }
-
 
 .modal-content {
   display: flex;
@@ -287,6 +286,50 @@ img {
   background: transparent;
   border: none;
   cursor: pointer;
+}
+
+/* responsive design for these model */
+@media (max-width: 480px) {
+  .modal {
+    width: 45%;
+    max-width: 90%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 16px;
+    border-radius: 10px;
+  }
+
+  .modal-content {
+    gap: 12px;
+  }
+
+  .modal h2 {
+    font-size: 1.1rem;
+  }
+
+  .modal p,
+  .modal label {
+    font-size: 0.85rem;
+  }
+
+  .modal select,
+  .modal input,
+  .modal textarea {
+    font-size: 0.85rem;
+    padding: 6px 8px;
+  }
+
+  .submit-btn {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  .close-btn {
+    top: 10px;
+    right: 10px;
+    font-size: 1.1rem;
+  }
 }
 
 /* Trigger Button */

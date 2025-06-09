@@ -72,34 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
     observer.observe(heroStats);
   }
 
-  // === Appointment Booking Modal ===
-  function toggleModal(show = null) {
-    const modal = document.getElementById('appointmentModal');
-    if (!modal) return;
-    const isVisible = modal.classList.contains('show');
-
-    if (show === true || (!isVisible && show === null)) {
-      modal.classList.add('show');
-      document.body.classList.add('modal-open');
-    } else {
-      modal.classList.remove('show');
-      document.body.classList.remove('modal-open');
-    }
-  }
-
-  window.addEventListener('click', function (e) {
-    const modal = document.getElementById('appointmentModal');
-    if (modal && modal.classList.contains('show') && !modal.querySelector('.modal-content').contains(e.target)) {
-      toggleModal(false);
-    }
-  });
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') {
-      toggleModal(false);
-    }
-  });
-
   // === AI Assistant Logic ===
   const askBtn = document.getElementById("askBtn");
   const promptInput = document.getElementById("userPrompt");
@@ -154,4 +126,21 @@ document.addEventListener("DOMContentLoaded", function () {
   return text.replace(/\n/g, '<br>');
 }
 
+});
+
+// === Appointment Booking Modal ===
+function toggleModal() {
+  const modal = document.getElementById('appointmentModal');
+  const bookBtn = document.getElementById('bookAppointmentBtn');
+    modal.classList.toggle('show');  
+    document.body.classList.toggle('modal-open');
+      if (bookBtn) {
+        bookBtn.addEventListener('click', () => toggleModal(true));
+}
+}
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    toggleModal(false);
+  }
 });
