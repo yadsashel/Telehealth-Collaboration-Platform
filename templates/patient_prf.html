@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Messagse</title>
+    <title>Profile</title>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for ('static', filename='css/styles.css') }}">
 </head>
@@ -71,7 +71,7 @@
   {% endif %}
 {% endwith %}
                             
-                    <section class="health-summary-section">
+  <section class="health-summary-section">
   <div class="health-summary-container">
     <div class="health-summary-header">
       <h3 class="health-summary-title">Health Summary</h3>
@@ -133,6 +133,29 @@
   <div class="personal-info-section">
     <h2>Personal Information</h2>
     <p>Manage your personal details and contact information.</p>
+     <form action="/patient_prf" method="POST" enctype="multipart/form-data" class="edit-profile-container">
+  <div class="edit-profile-header">
+    <div class="profile-pic">
+      <label for="imageUpload">
+        <img src="" alt="Profile Picture" />
+        <input type="file" id="imageUpload" name="image" accept="image/*" hidden>
+      </label>
+      <p class="edit-photo-hint">Click to change photo</p>
+    </div>
+    <div class="profile-details">
+      <h2>username</h2>
+      <p>email</p>
+      <p class="role-badge">user type</p>
+    </div>
+  </div>
+
+  <div class="editable-fields">
+    <label for="tel">Phone Number</label>
+    <input required>
+
+    <button type="submit" class="save-btn">Save Changes</button>
+  </div>
+</form>
   </div>
 </section>
 

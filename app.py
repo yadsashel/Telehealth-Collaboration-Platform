@@ -167,12 +167,6 @@ def logout():
         flash('Logged out successfully!', 'success')
         return redirect(url_for('login'))
 
-# ==== route for the patient dashboard && it's compenents ====
-@app.route('/patient_dash')
-def patient_dash():
-    return render_template('patient_dash.html')
-
-
 @app.route('/api/ask', methods=['POST'])
 def ask():
     data = request.get_json()
@@ -211,10 +205,20 @@ def ask():
         return jsonify({"error": "Failed to get AI response"}), 500
 
 
+# ==== route for the patient dashboard && it's compenents ====
+@app.route('/patient_dash')
+def patient_dash():
+    return render_template('patient_dash.html')
+
+
 #route for patient_appoin
 @app.route('/patient_appoin')
 def patient_appoin():
     return render_template('patient_appoin.html')
+
+@app.route('/schedule_app')
+def schedule_app():
+    return render_template('schedule_app')
 
 #route for patient_mess
 @app.route('/patient_mess')
@@ -222,15 +226,10 @@ def patient_mess():
     return render_template('patient_mess.html')
 
 #route for patient_prf
-@app.route('/patient_prf')
+@app.route('/patient_prf', methods=['GET', 'POST'])
 def patient_prf():
     return render_template('patient_prf.html')
 
-#route for patient_sttg
-@app.route('/patient_sttg')
-def patient_sttg():
-    return render_template('patient_sttg.html')
-        
 # ==== route for the doctor dashboard  && it's compenents ====
 @app.route('/doctor_dash')
 def doctor_dash():

@@ -126,19 +126,19 @@
                                 <h2>Book an Appointment</h2>
                                 <p>Select your preferred doctor, date, and time.</p>
 
-                            <form>
-                                <label for="appointmentType">Appointment Type</label>
+                            <form action="/schedule_app" method="post">
+                                <label for="appointmentType" name="appointmentType" >Appointment Type</label>
                                 <select id="appointmentType" required>
-                                   <option>Select appointment type</option>
-                                   <option>Doctor Visit</option>
-                                   <option>Prescription Refill</option>
-                                   <option>Lab Tests</option>
+                                   <option value="">Select appointment type</option>
+                                   <option value="Doctor_Visit">Doctor Visit</option>
+                                   <option value="Prescription_Refill">Prescription Refill</option>
+                                   <option value="Lab_Tests">Lab Tests</option>
                                 </select>
 
                                 <label for="doctor">Select Doctor</label>
                                 <select id="doctor" required>
-                                   <option>Choose a doctor</option>
-                                   <option>Dr. Sarah Johnson</option>
+                                   <option value="">Choose a doctor</option>
+                                   <option >Dr. Sarah Johnson</option>
                                    <option>Dr. Ahmed Nouri</option>
                                    </select>
 
