@@ -55,11 +55,11 @@ def about():
 
 @app.route('/services')
 def services():
-    return render_template('services.html')
+    return render_template('Services.html')
 
 @app.route('/contact')
 def contact():
-    return render_template('contact.html')
+    return render_template('Contact.html')
         
 @app.route('/privacy')
 def privacy():
