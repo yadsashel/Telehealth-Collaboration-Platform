@@ -29,16 +29,16 @@
                     <li class="nav-item">
                         <a href="{{ url_for ('patient_prf') }}"><span class="icon">👤</span> Profile</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ url_for ('patient_sttg') }}"><span class="icon">⚙️</span> Settings</a>
-                    </li>
                 </ul>
             </nav>
             <div class="user-profile">
-                <div class="avatar">P</div>
-                <div class="user-info">
-                    <span class="user-role">Patient Account</span>
-                    <span class="user-name">Emma Wilson</span>
+                <div class="avatar">
+  {% if user.image_url %}
+    <img src="{{ url_for('static', filename=user.image_url) }}" alt="Profile Picture" class="img-thumbnail mb-2" width="150">
+  {% else %}
+    <img src="{{ url_for('static', filename='default_profile.png') }}" alt="Default Profile Picture" class="img-thumbnail mb-2" width="150">
+  {% endif %}
+   </div>
                 </div>
             </div>
         </aside>

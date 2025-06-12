@@ -1,5 +1,7 @@
 import os
 import sys
+import uuid
+from uuid import uuid4
 import requests
 from flask_cors import CORS
 from flask import Flask, render_template, redirect, request, flash, url_for, session, jsonify
@@ -27,6 +29,10 @@ DATABASE_URL = os.getenv('DATABASE_URL')
 app.secret_key = os.getenv('SECRET_KEY')
 
 TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY")
+
+upload_folder = os.path.join('static', 'uploads', 'profile_pics')
+if not os.path.exists(upload_folder):
+    os.makedirs(upload_folder)
 
 
 #for uploading pictures 
@@ -210,7 +216,6 @@ def ask():
 def patient_dash():
     return render_template('patient_dash.html')
 
-
 #route for patient_appoin
 @app.route('/patient_appoin')
 def patient_appoin():
@@ -228,7 +233,128 @@ def patient_mess():
 #route for patient_prf
 @app.route('/patient_prf', methods=['GET', 'POST'])
 def patient_prf():
-    return render_template('patient_prf.html')
+    user_id = session.get('user_id')
+    if not user_id:
+        flash('Please log in to access profile.', 'error')
+        return redirect(url_for('login'))
+
+    upload_folder = os.path.join('static', 'uploads', 'profile_pics')
+    if not os.path.exists(upload_folder):
+        os.makedirs(upload_folder)
+
+    with SQLASession() as db_session:
+        user = db_session.query(User).filter_by(id=user_id).first()
+        if not user:
+            flash('User not found.', 'error')
+            return redirect(url_for('login'))
+
+        if request.method == 'POST':
+            # Get form data
+            first_name = request.form.get('first_name')
+            last_name = request.form.get('last_name')
+            email = request.form.get('email')
+            tel = request.form.get('tel')
+            sc_code = request.form.get('sc_code')
+
+            # Optional password update
+            password = request.form.get('password')
+            confirm_password = request.form.get('confirm_password')
+
+            if password or confirm_password:
+                if password != confirm_password:
+                    flash('Passwords do not match!', 'error')
+                    return redirect(url_for('patient_prf'))
+                user.password = generate_password_hash(password)
+
+            if email != user.email:
+                existing_user = db_session.query(User).filter_by(email=email).first()
+                if existing_user:
+                    flash('Email is already registered by another user.', 'error')
+                    return redirect(url_for('patient_prf'))
+                user.email = email
+
+            user.first_name = first_name
+            user.last_name = last_name
+            user.tel = tel
+            user.sc_code = sc_code
+
+            image = request.files.get('image')
+            if image and image.filename != '':
+                filename = secure_filename(image.filename)
+                unique_filename = f"{uuid.uuid4().hex}_{filename}"
+                upload_path = os.path.join(upload_folder, unique_filename)
+                image.save(upload_path)
+                user.image_url = os.path.join('uploads', 'profile_pics', unique_filename)
+
+            db_session.commit()
+            flash('Profile updated successfully!', 'success')
+            return redirect(url_for('patient_prf'))
+
+    return render_template('patient_prf.html', user=user)
+
+    # Assuming you have user_id stored in session after login
+    user_id = session.get('user_id')
+    if not user_id:
+        flash('Please log in to access profile.', 'error')
+        return redirect(url_for('login'))
+
+    with SQLASession() as db_session:
+        user = db_session.query(User).filter_by(id=user_id).first()
+        if not user:
+            flash('User not found.', 'error')
+            return redirect(url_for('login'))
+
+        if request.method == 'POST':
+            # Get form data
+            first_name = request.form.get('first_name')
+            last_name = request.form.get('last_name')
+            email = request.form.get('email')
+            tel = request.form.get('tel')
+            image_url = request.form.get('image_url')
+            sc_code = request.form.get('sc_code')
+
+            # Optional password update
+            password = request.form.get('password')
+            confirm_password = request.form.get('confirm_password')
+
+            # Validate password match if password fields are filled
+            if password or confirm_password:
+                if password != confirm_password:
+                    flash('Passwords do not match!', 'error')
+                    return redirect(url_for('patient_prf'))
+                user.password = generate_password_hash(password)
+
+            # Check if email is changing and if new email is already taken
+            if email != user.email:
+                existing_user = db_session.query(User).filter_by(email=email).first()
+                if existing_user:
+                    flash('Email is already registered by another user.', 'error')
+                    return redirect(url_for('patient_prf'))
+                user.email = email
+
+            # Update other fields
+            user.first_name = first_name
+            user.last_name = last_name
+            user.image_url = image_url
+            user.tel = tel
+            user.sc_code = sc_code
+
+            # Handle profile image upload
+            image = request.files.get('image')
+            if image and image.filename != '':
+              filename = secure_filename(image.filename)
+              unique_filename = f"{uuid.uuid4().hex}_{filename}"
+              upload_path = os.path.join(upload_folder, unique_filename)
+              image.save(upload_path)
+              user.image_url = os.path.join('uploads', 'profile_pics', unique_filename)  # Save relative path
+
+              db_session.commit()
+
+            flash('Profile updated successfully!', 'success')
+            return redirect(url_for('patient_prf'))
+
+    # GET request - render form with current user data
+    return render_template('patient_prf.html', user=user)
 
 # ==== route for the doctor dashboard  && it's compenents ====
 @app.route('/doctor_dash')
